@@ -20,7 +20,7 @@ public class SwaggerConfig {
 
     /**
      * 깃 테스트
-     * 추가
+     * 추가 v2
      * http://localhost:8080/swagger-ui.html#dddddddddddddddddddddddd123dddddddddd
      */
     @Bean
