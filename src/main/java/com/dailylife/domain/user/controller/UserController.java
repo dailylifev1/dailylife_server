@@ -1,6 +1,7 @@
 package com.dailylife.domain.user.controller;
 
 import com.dailylife.domain.user.dto.UserJoinRequest;
+import com.dailylife.domain.user.dto.UserLoginRequest;
 import com.dailylife.domain.user.entity.User;
 import com.dailylife.domain.user.service.UserService;
 import io.swagger.annotations.Api;
@@ -28,5 +29,10 @@ public class UserController {
         return ResponseEntity.ok(userService.join(userJoinRequest));
     }
 
+    @ApiOperation(value = "로그인", notes = "로그인을 합니다.")
+    @PostMapping("/login")
+    public ResponseEntity<Boolean> loginUser(@Valid @RequestBody UserLoginRequest userLoginRequestRequest) {
+        return ResponseEntity.ok(userService.login(userLoginRequestRequest));
+    }
 
 }
