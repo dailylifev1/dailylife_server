@@ -22,7 +22,7 @@ public class SwaggerConfig {
      * 깃 테스트
      * 추가 v5
      * 신동민이 수정했음3333
-     * http://localhost:8080/swagger-ui.html#dddddddddddddddddddddddd123dddddddddd
+     * http://localhost:8080/swagger-ui.html#
      */
     @Bean
     public Docket restAPI() {
