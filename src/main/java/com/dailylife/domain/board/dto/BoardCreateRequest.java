@@ -24,5 +24,5 @@ public class BoardCreateRequest {
 
     @NotBlank(message = "게시물 대표 사진을 등록해주세요")
     @ApiModelProperty(notes = "게시물 대표 사진을 등록해주세요")
-    private String thumNail;
+    private String thumbNail;
 }

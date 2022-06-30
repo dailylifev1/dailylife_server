@@ -1,6 +1,7 @@
 package com.dailylife.domain.board.entity;
 
 import com.dailylife.domain.board.dto.BoardCreateRequest;
+import com.dailylife.domain.board.dto.BoardUpdateRequest;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -24,7 +25,7 @@ public class Board {
     private String content;
     private String userId;
     private String userNickName;
-    private String thumNail;
+    private String thumbNail;
     private Long likeCount;
 
 
@@ -32,7 +33,17 @@ public class Board {
         return  Board.builder()
                 .title(boardCreateRequest.getTitle())
                 .content(boardCreateRequest.getContent())
-                .thumNail(boardCreateRequest.getThumNail()).build();
+                .thumbNail(boardCreateRequest.getThumbNail()).build();
 
     }
+//save로 수정 버전
+    public static Board toEntityUpdate(BoardUpdateRequest boardUpdateRequest) {
+        return  Board.builder()
+                .boardNum(boardUpdateRequest.getBoardNum())
+                .title(boardUpdateRequest.getTitle())
+                .content(boardUpdateRequest.getContent())
+                .thumbNail(boardUpdateRequest.getThumbNail()).build();
+
+    }
+
 }
