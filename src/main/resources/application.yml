@@ -19,3 +19,16 @@ spring:
         format_sql: true
     database-platform: org.hibernate.dialect.MySQL5Dialect
     defer-datasource-initialization: true
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: dailylifegit@gmail.com
+    password: rhtzjhfmpfmvslvj
+
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
