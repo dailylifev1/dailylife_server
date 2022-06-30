@@ -27,6 +27,8 @@ public class Board {
     private String userNickName;
     private String thumbNail;
     private Long likeCount;
+    private String originFileName;
+    private String fullPath;
 
 
     public static Board toEntity(BoardCreateRequest boardCreateRequest) {
