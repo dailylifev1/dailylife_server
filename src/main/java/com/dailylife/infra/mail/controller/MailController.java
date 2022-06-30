@@ -2,6 +2,7 @@ package com.dailylife.infra.mail.controller;
 
 import com.dailylife.infra.mail.dto.SendMailRequest;
 import com.dailylife.infra.mail.service.MailServiceImpl;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +20,7 @@ import java.util.regex.Pattern;
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("api/mails")
+@Api(tags = "Mail API")
 public class MailController {
 
     private final MailServiceImpl mailService;
