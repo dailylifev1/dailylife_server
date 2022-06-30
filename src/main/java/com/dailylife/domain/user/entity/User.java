@@ -28,8 +28,7 @@ public class User {
 
     public static User toEntity(UserJoinRequest userJoinRequest) {
         return  User.builder()
-
-                .userName(userJoinRequest.getUserId())
+                .userId(userJoinRequest.getUserId())
                 .userPassword(userJoinRequest.getUserPassword()).build();
     }
 
