@@ -1,8 +1,8 @@
-package com.dailylife.board.service;
+package com.dailylife.domain.board.service;
 
-import com.dailylife.board.dto.BoardCreateRequest;
-import com.dailylife.board.entity.Board;
-import com.dailylife.board.repository.BoardRepository;
+import com.dailylife.domain.board.dto.BoardCreateRequest;
+import com.dailylife.domain.board.entity.Board;
+import com.dailylife.domain.board.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

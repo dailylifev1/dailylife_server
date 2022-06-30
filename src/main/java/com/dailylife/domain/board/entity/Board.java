@@ -1,9 +1,6 @@
-package com.dailylife.board.entity;
+package com.dailylife.domain.board.entity;
 
-import com.dailylife.board.dto.BoardCreateRequest;
-import com.dailylife.board.repository.BoardRepository;
-import com.dailylife.domain.user.dto.UserJoinRequest;
-import com.dailylife.domain.user.entity.User;
+import com.dailylife.domain.board.dto.BoardCreateRequest;
 import lombok.*;
 
 import javax.persistence.Entity;

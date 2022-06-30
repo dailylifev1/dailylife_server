@@ -1,8 +1,8 @@
-package com.dailylife.board.controller;
+package com.dailylife.domain.board.controller;
 
-import com.dailylife.board.dto.BoardCreateRequest;
-import com.dailylife.board.entity.Board;
-import com.dailylife.board.service.BoardService;
+import com.dailylife.domain.board.dto.BoardCreateRequest;
+import com.dailylife.domain.board.entity.Board;
+import com.dailylife.domain.board.service.BoardService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;

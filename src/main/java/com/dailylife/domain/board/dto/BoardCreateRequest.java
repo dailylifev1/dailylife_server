@@ -1,4 +1,4 @@
-package com.dailylife.board.dto;
+package com.dailylife.domain.board.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

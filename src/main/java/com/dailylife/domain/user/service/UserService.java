@@ -8,7 +8,7 @@ public interface UserService {
 
     /**
      * ㅇㅇㅇ
-     * @param userJoinRequestdddd
+     * @param
      * @returnㅇㅇㅇㅇㅇㅇㅇddddddddddddddddd
      */
 
