@@ -24,8 +24,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean login(UserLoginRequest userLoginRequest) {
-        if (userRepository.countByUserName(userLoginRequest.getUserName()) == 1) { // 입력한 id가 DB에 존재하는 경우
-            User user = userRepository.findByUserName(userLoginRequest.getUserName()); // 입력한 id를 user객체에 넣어준다
+        if (userRepository.countByUserName(userLoginRequest.getUserId()) == 1) { // 입력한 id가 DB에 존재하는 경우
+            User user = userRepository.findByUserName(userLoginRequest.getUserId()); // 입력한 id를 user객체에 넣어준다
             if (!user.getUserPassword().equals(userLoginRequest.getUserPassword())) { // 로그인 ID가 존재는 하지만 PW가 다를경우
                 return false;
             } else return true; //로그인 ID와 PW가 일치하면 true 리턴

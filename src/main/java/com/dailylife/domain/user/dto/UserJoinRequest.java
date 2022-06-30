@@ -17,7 +17,7 @@ public class UserJoinRequest {
 
     @NotBlank(message = "유저네임을 입력해주세요")
     @ApiModelProperty(notes = "유저네임을 입력해주세요")
-    private String userName;
+    private String userId;
 
     @NotBlank(message = "유저의 패스워드를 입력해주세요")
     @ApiModelProperty(notes = "유저의 패스워드를 입력해주세요")
