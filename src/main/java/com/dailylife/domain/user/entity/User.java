@@ -31,9 +31,6 @@ public class User {
                 .userPassword(userJoinRequest.getUserPassword()).build();
     }
 
-    //api localhost:8080
-//    dddddddd
-
 
 
 }

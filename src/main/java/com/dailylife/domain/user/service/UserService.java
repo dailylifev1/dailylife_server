@@ -6,12 +6,6 @@ import com.dailylife.domain.user.entity.User;
 
 public interface UserService {
 
-    /**
-     * ㅇㅇㅇ
-     * @param
-     * @returnㅇㅇㅇㅇㅇㅇㅇddddddddddddddddd
-     */
-
     User join(UserJoinRequest userJoinRequest);
 
     boolean login(UserLoginRequest userLoginRequest);
