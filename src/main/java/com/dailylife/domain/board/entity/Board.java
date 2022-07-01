@@ -45,7 +45,6 @@ public class Board {
                 .title(boardUpdateRequest.getTitle())
                 .content(boardUpdateRequest.getContent())
                 .thumbNail(boardUpdateRequest.getThumbNail()).build();
-
     }
 
 }
