@@ -41,3 +41,10 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+apply plugin: 'war'
+
+bootWar {
+	archiveBaseName = "dailyLife"
+	archiveFileName = "dailyLife.war"
+	archiveVersion = "0.0.0"
+}
