@@ -19,7 +19,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userNum;
 
-    @Column(unique = true) // id는 중복이 되면 안된다.
     private String userId;
 
     private String userName;
@@ -32,7 +31,8 @@ public class User {
                 .userPassword(userJoinRequest.getUserPassword()).build();
     }
 
-//   @Transactional
+    //api localhost:8080
+
 
 
 }
