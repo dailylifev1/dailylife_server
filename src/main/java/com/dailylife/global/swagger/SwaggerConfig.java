@@ -23,7 +23,7 @@ public class SwaggerConfig {
      * 추가 v5
      * 신동민이 수정했음3333
      * 깃 수정 육정근 0630
-     * 지라 연동 테스트2
+     * 지라 연동 테스트3
      * http://localhost:8080/swagger-ui.html#
      */
     @Bean
