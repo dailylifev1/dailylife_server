@@ -9,4 +9,5 @@ public interface UserService {
     User join(UserJoinRequest userJoinRequest);
 
     boolean login(UserLoginRequest userLoginRequest);
+
 }
