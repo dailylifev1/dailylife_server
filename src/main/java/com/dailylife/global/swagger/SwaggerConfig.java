@@ -20,6 +20,7 @@ public class SwaggerConfig {
 
     /**
      * git - jira test by dm
+     * git - jira test by ygp
      */
     @Bean
     public Docket restAPI() {
