@@ -31,7 +31,7 @@ public class UserController {
 
     @ApiOperation(value = "로그인", notes = "로그인을 합니다.")
     @PostMapping("/login")
-    public ResponseEntity<Boolean> loginUser(@Valid @RequestBody UserLoginRequest userLoginRequestRequest) {
+    public ResponseEntity<User> loginUser(@Valid @RequestBody UserLoginRequest userLoginRequestRequest) {
         return ResponseEntity.ok(userService.login(userLoginRequestRequest));
     }
 
