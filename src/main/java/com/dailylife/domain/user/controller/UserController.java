@@ -2,6 +2,7 @@ package com.dailylife.domain.user.controller;
 
 import com.dailylife.domain.user.dto.UserJoinRequest;
 import com.dailylife.domain.user.dto.UserLoginRequest;
+import com.dailylife.domain.user.dto.UserModifyRequest;
 import com.dailylife.domain.user.entity.User;
 import com.dailylife.domain.user.service.UserService;
 import io.swagger.annotations.Api;
@@ -12,8 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 
 @RestController
 @RequestMapping("api/users")
@@ -33,6 +36,17 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<User> loginUser(@Valid @RequestBody UserLoginRequest userLoginRequestRequest) {
         return ResponseEntity.ok(userService.login(userLoginRequestRequest));
+    }
+
+    @ApiOperation(value = "내 정보 수정", notes = "내 정보를 수정합니다")
+    @PostMapping("/modifyUser")
+    public ResponseEntity<User> modifyUser(@Valid @RequestBody UserModifyRequest userModifyRequest) {
+        return ResponseEntity.ok(userService.modify(userModifyRequest));
+    }
+    @ApiOperation(value = "내 프로필 사진 수정", notes = "내 프로필사진을 수정합니다")
+    @PostMapping("/modifyProfileImg")
+    public ResponseEntity<String> modifyProfileImg(MultipartFile img) throws IOException {
+        return ResponseEntity.ok(userService.modifyProfileImg(img));
     }
 
 }

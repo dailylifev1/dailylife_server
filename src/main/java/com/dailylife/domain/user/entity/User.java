@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity(name = "tbl_user")
+@ToString
 @Getter
 @Setter
 @NoArgsConstructor
