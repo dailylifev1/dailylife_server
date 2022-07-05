@@ -16,11 +16,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel(description = "로그인을 위한 요청 객체")
-public class UserJoinRequest {
-
-    @NotBlank(message = "아이디를 입력해주세요")
-    @ApiModelProperty(notes = "아이디를 입력해주세요")
-    private String userId;
+public class UserModifyRequest {
 
     @NotBlank(message = "패스워드를 입력해주세요")
     @ApiModelProperty(notes = "패스워드를 입력해주세요")
@@ -34,11 +30,6 @@ public class UserJoinRequest {
     @ApiModelProperty(notes = "핸드폰 번호를 입력해주세요")
     private String userPhoneNumber;
 
-    @NotBlank(message = "이메일을 입력해주세요")
-    @ApiModelProperty(notes = "이메일을 입력해주세요")
-    private String userEmail;
-
-    private Date userJoinDate;
 
     private String userProfileImg;
 
