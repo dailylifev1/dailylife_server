@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity(name = "tbl_user")
 @Getter
@@ -25,12 +26,26 @@ public class User {
 
     private String userPassword;
 
+    private String userPhoneNumber;
+
+    private String userEmail;
+
+    private LocalDateTime userJoinDate;
+
+    private String userProfileImg;
+
+    private String accessToken;
+
     public static User toEntity(UserJoinRequest userJoinRequest) {
         return  User.builder()
                 .userId(userJoinRequest.getUserId())
-                .userPassword(userJoinRequest.getUserPassword()).build();
+                .userPassword(userJoinRequest.getUserPassword())
+                .userName(userJoinRequest.getUserName())
+                .userPhoneNumber(userJoinRequest.getUserPhoneNumber())
+                .userEmail(userJoinRequest.getUserEmail())
+                .userJoinDate(LocalDateTime.now())
+                .build();
     }
-
 
 
 }
