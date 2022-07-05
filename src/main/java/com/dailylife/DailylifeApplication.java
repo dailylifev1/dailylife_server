@@ -9,5 +9,4 @@ public class DailylifeApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DailylifeApplication.class, args);
 	}
-
 }

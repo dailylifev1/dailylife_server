@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -25,11 +26,15 @@ public class UserJoinRequest {
     @ApiModelProperty(notes = "유저의 패스워드를 입력해주세요")
     private String userPassword;
 
+    private String userName;
 
+    private String userPhoneNumber;
 
+    private String userEmail;
 
+    private Date userJoinDate;
 
-
+    private String userProfileImg;
 
 
 }
