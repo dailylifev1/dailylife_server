@@ -1,6 +1,7 @@
 package com.dailylife.global.web;
 
 import com.dailylife.global.interceptor.JwtInterceptor;
+import com.dailylife.global.interceptor.WebInterceptor;
 import com.dailylife.global.jwt.service.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
@@ -18,8 +19,21 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+
+        registry.addInterceptor(new WebInterceptor()).
+                order(1).
+                addPathPatterns("/**").
+                excludePathPatterns(
+                        "/swagger-ui.html",
+                        "/swagger-ui/**" ,
+                        "/swagger-resources/**",
+                        "/webjars/**",
+                        "/api/users/join",
+                        "/api/users/login"
+                        ,"/error");
+
             registry.addInterceptor(new JwtInterceptor(jwtService)).
-                    order(1).
+                    order(2).
                     addPathPatterns("/**").
                     excludePathPatterns(
                             "/swagger-ui.html",
