@@ -27,10 +27,8 @@ public class SingleUpload {
         String saveFileName = UUID.randomUUID().toString().replaceAll("-", "") + orgFileExtension; // 파일 랜덤이름
         Long saveFileSize = file.getSize();
 
-
         target = new File(uploadPath, saveFileName);
         file.transferTo(target);
-
 
         return saveFileName;
     }
