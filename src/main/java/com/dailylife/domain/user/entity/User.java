@@ -1,15 +1,18 @@
 package com.dailylife.domain.user.entity;
 
+import com.dailylife.domain.board.entity.Board;
 import com.dailylife.domain.user.dto.UserJoinRequest;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "tbl_user")
-@ToString
 @Getter
 @Setter
 @NoArgsConstructor
@@ -36,6 +39,10 @@ public class User {
     private String userProfileImg;
 
     private String accessToken;
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<Board> boards = new ArrayList<>();
 
     public static User toEntity(UserJoinRequest userJoinRequest) {
         return  User.builder()

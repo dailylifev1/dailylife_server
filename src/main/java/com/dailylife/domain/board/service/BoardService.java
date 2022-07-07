@@ -12,4 +12,6 @@ public interface BoardService {
     boolean update(BoardUpdateRequest boardUpdateRequest);
 
     boolean delete(Long boardNum);
+
+
 }
