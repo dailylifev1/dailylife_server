@@ -2,6 +2,7 @@ package com.dailylife.domain.user.entity;
 
 import com.dailylife.domain.board.entity.Board;
 import com.dailylife.domain.user.dto.UserJoinRequest;
+import com.dailylife.domain.user_follow.entity.UserFollow;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,9 +41,13 @@ public class User {
 
     private String accessToken;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.PERSIST)
     @JsonIgnore
     private List<Board> boards = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user" , orphanRemoval = true, cascade = CascadeType.PERSIST)
+    @JsonIgnore
+    private List<UserFollow> userFollows = new ArrayList<>();
 
     public static User toEntity(UserJoinRequest userJoinRequest) {
         return  User.builder()
