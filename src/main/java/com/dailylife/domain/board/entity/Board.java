@@ -2,6 +2,7 @@ package com.dailylife.domain.board.entity;
 
 import com.dailylife.domain.board.dto.BoardCreateRequest;
 import com.dailylife.domain.board.dto.BoardUpdateRequest;
+import com.dailylife.domain.reply.entity.Reply;
 import com.dailylife.domain.user.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
@@ -33,14 +34,21 @@ public class Board {
     @JoinColumn(name = "uno")
     User user;
 
-    @OneToMany
+    @OneToMany(mappedBy = "board")
     @JsonIgnore
     private List<Image> images = new ArrayList<>();
+
+    @OneToMany(mappedBy = "board")
+    @JsonIgnore
+    private List<Reply> replies = new ArrayList<>();
 
     public void setUser(User user) {
         this.user = user;
         user.getBoards().add(this);
     }
+
+
+
 
     public static Board toEntity(BoardCreateRequest boardCreateRequest ,User user) {
         Board build = Board.builder()
