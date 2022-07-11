@@ -1,5 +1,6 @@
 package com.dailylife.domain.reply.dto;
 
+import com.dailylife.domain.board.entity.Board;
 import com.dailylife.domain.reply.entity.Reply;
 import com.dailylife.domain.user.entity.User;
 import io.swagger.annotations.ApiModel;
@@ -22,12 +23,15 @@ public class ReplyInsertRequest {
     @ApiModelProperty(notes = "댓글 내용을 입력해주세요.")
     private String replyContext;
 
-    public Reply toEntity(User user) {
+    private Long boardNum;
+
+ /*   public Reply toEntity(User user) {
         Reply reply = new Reply();
-        reply.setReplyContext(this.replyContext);
+        reply.setReplyContext(replyContext);
         reply.setUser(user);
         reply.setReplyTime(LocalDateTime.now());
+        reply.setBoardNum(boardNum);
         return reply;
-    }
+    }*/
 
 }

@@ -2,12 +2,16 @@ package com.dailylife.domain.reply.service;
 
 import com.dailylife.domain.reply.dto.ReplyInsertRequest;
 import com.dailylife.domain.reply.entity.Reply;
-import com.dailylife.domain.user.entity.User;
-import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
 
 public interface ReplyService {
 
     Reply insert(ReplyInsertRequest replyInsertRequest);
 
-    boolean delete(Long replyId);
+    boolean delete(Long replyNum);
+
+    List<Reply> getReplyList(Long boardNum);
+
 }
