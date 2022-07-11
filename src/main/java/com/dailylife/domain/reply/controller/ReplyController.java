@@ -5,6 +5,7 @@ import com.dailylife.domain.board.dto.BoardUpdateRequest;
 import com.dailylife.domain.board.entity.Board;
 import com.dailylife.domain.board.service.BoardService;
 import com.dailylife.domain.reply.dto.ReplyDeleteRequest;
+import com.dailylife.domain.reply.dto.ReplyGetRequest;
 import com.dailylife.domain.reply.dto.ReplyInsertRequest;
 import com.dailylife.domain.reply.entity.Reply;
 import com.dailylife.domain.reply.service.ReplyService;
@@ -16,6 +17,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/reply")
@@ -31,10 +34,16 @@ public class ReplyController {
         return ResponseEntity.ok(replyService.insert(replyInsertRequest));
     }
 
-    @ApiOperation(value = "게시물 삭제", notes = "게시물 삭제 완료")
+    @ApiOperation(value = "댓글 삭제", notes = "댓글 삭제 완료")
     @DeleteMapping("/delete/{replyId}")
-    public ResponseEntity<Boolean> deleteReply(@PathVariable("replyId")Long replyId, ReplyDeleteRequest replyDeleteRequest){
-        return ResponseEntity.ok(replyService.delete(replyId));
+    public ResponseEntity<Boolean> deleteReply(@PathVariable("replyNum")Long replyNum, ReplyDeleteRequest replyDeleteRequest){
+        return ResponseEntity.ok(replyService.delete(replyNum));
+    }
+
+    @ApiOperation(value = "댓글 확인", notes = "게시물 댓글 확인")
+    @GetMapping("/getReply/{boardNum}")
+    public ResponseEntity<List<Reply>> getReply(@PathVariable("boardNum")Long boardNum, ReplyGetRequest replyGetRequest){
+        return ResponseEntity.ok(replyService.getReplyList(boardNum));
     }
 
 }
