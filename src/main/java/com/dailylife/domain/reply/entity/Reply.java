@@ -1,14 +1,17 @@
 package com.dailylife.domain.reply.entity;
 
-import com.dailylife.domain.board.entity.Board;
+import com.dailylife.domain.heart.entity.Heart;
 import com.dailylife.domain.reply.dto.ReplyInsertRequest;
 import com.dailylife.domain.user.entity.User;
+import com.dailylife.domain.user_follow.entity.UserFollow;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 
 import java.time.LocalDateTime;
-
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity(name = "tbl_reply")
@@ -37,6 +40,10 @@ public class Reply {
     private Board board;*/
 
 
+
+    @OneToMany(mappedBy = "reply" ) // reply이 삭제되면 자동으로 heart또한 삭제
+    @JsonIgnore
+    private List<Heart> hearts = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="userNum")

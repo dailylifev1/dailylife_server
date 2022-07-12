@@ -1,10 +1,11 @@
 package com.dailylife.global.web;
 
-import com.dailylife.global.filter.CorsFilter;
+
 import com.dailylife.global.interceptor.JwtInterceptor;
 import com.dailylife.global.interceptor.WebInterceptor;
 import com.dailylife.global.jwt.service.JwtService;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.filters.CorsFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

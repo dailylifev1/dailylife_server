@@ -1,6 +1,7 @@
 package com.dailylife.domain.user.entity;
 
 import com.dailylife.domain.board.entity.Board;
+import com.dailylife.domain.heart.entity.Heart;
 import com.dailylife.domain.reply.entity.Reply;
 import com.dailylife.domain.user.dto.UserJoinRequest;
 import com.dailylife.domain.user_follow.entity.UserFollow;
@@ -53,6 +54,9 @@ public class User {
     @OneToMany(mappedBy = "user")
     @JsonIgnore
     private List<Reply> replies = new ArrayList<>();
+
+
+
 
     public static User toEntity(UserJoinRequest userJoinRequest) {
         return  User.builder()
