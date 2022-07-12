@@ -1,39 +1,64 @@
 package com.dailylife.global.web;
 
+import com.dailylife.global.filter.CorsFilter;
 import com.dailylife.global.interceptor.JwtInterceptor;
 import com.dailylife.global.interceptor.WebInterceptor;
 import com.dailylife.global.jwt.service.JwtService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableWebMvc
 @RequiredArgsConstructor
 public class WebConfig implements WebMvcConfigurer {
 
+    public static final String ALLOWED_METHOD_NAMES = "GET,HEAD,POST,PUT,DELETE,TRACE,OPTIONS,PATCH";
     private final JwtService jwtService;
+
+    @Bean
+    public FilterRegistrationBean getFilterRegistrationBean() {
+        FilterRegistrationBean registrationBean = new FilterRegistrationBean(new CorsFilter());
+        registrationBean.setOrder(Integer.MIN_VALUE);
+        registrationBean.addUrlPatterns("/*");
+//        registrationBean.setUrlPatterns(Arrays.asList("/board/*"));
+        return registrationBean;
+    }
+
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowedOriginPatterns("*")
+                .allowedHeaders("*")
+                .exposedHeaders("*")
+                .allowedMethods(ALLOWED_METHOD_NAMES.split(","));
+
+
+    }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
 
-        registry.addInterceptor(new WebInterceptor()).
-                order(1).
-                addPathPatterns("/**").
-                excludePathPatterns(
-                        "/swagger-ui.html",
-                        "/swagger-ui/**" ,
-                        "/swagger-resources/**",
-                        "/webjars/**",
-                        "/api/users/join",
-                        "/api/users/login"
-                        ,"/error");
+//        registry.addInterceptor(new WebInterceptor()).
+//                order(1).
+//                addPathPatterns("/**").
+//                excludePathPatterns(
+//                        "/swagger-ui.html",
+//                        "/swagger-ui/**" ,
+//                        "/swagger-resources/**",
+//                        "/webjars/**",
+//                        "/api/users/join",
+//                        "/api/users/login"
+//                        ,"/error");
 
             registry.addInterceptor(new JwtInterceptor(jwtService)).
-                    order(2).
+                    order(1).
                     addPathPatterns("/**").
                     excludePathPatterns(
                             "/swagger-ui.html",
@@ -41,7 +66,9 @@ public class WebConfig implements WebMvcConfigurer {
                             "/swagger-resources/**",
                             "/webjars/**",
                             "/api/users/join",
-                            "/api/users/login"
+                            "/api/users/login",
+                            "/api/users/joinTest",
+                            "/api/users/loginTest"
                             ,"/error");
 
     }

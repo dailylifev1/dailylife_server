@@ -2,14 +2,15 @@ package com.dailylife.domain.board.service;
 
 import com.dailylife.domain.board.dto.BoardCreateRequest;
 import com.dailylife.domain.board.dto.BoardDeleteRequest;
-import com.dailylife.domain.board.dto.BoardImageRequest;
 import com.dailylife.domain.board.dto.BoardUpdateRequest;
 import com.dailylife.domain.board.entity.Board;
-import com.dailylife.domain.board.entity.Image;
 import com.dailylife.domain.board.repository.BoardRepository;
-import com.dailylife.domain.board.repository.ImageRepository;
+import com.dailylife.domain.image.dto.BoardImageRequest;
+import com.dailylife.domain.image.entity.Image;
+import com.dailylife.domain.image.repository.ImageRepository;
 import com.dailylife.domain.user.entity.User;
 import com.dailylife.domain.user.repository.UserRepository;
+import com.dailylife.global.fileUpload.MultiUpload;
 import com.dailylife.global.jwt.service.JwtService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +18,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.swing.text.html.parser.Entity;
+import java.io.IOException;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -26,15 +29,16 @@ public class BoardServiceImpl implements BoardService{
     private final BoardRepository boardRepository;
     private final UserRepository userRepository;
     private final ImageRepository imageRepository;
+    private final MultiUpload multiUpload;
+
     @Override
     @Transactional
-    public Board create(BoardCreateRequest boardCreateRequest) {
-        String id = jwtService.getLoginId();
-        User user = userRepository.findByUserId(id);
-        Board board = boardRepository.save(Board.toEntity(boardCreateRequest, user));
-        BoardImageRequest boardImageRequest = new BoardImageRequest();
-        boardImageRequest.setImgName(boardCreateRequest.getImageName()); // 게시글 등록 시 , 가져오는 사진 이름들을 추가
-        Image image = imageRepository.save(Image.toEntity(boardImageRequest,board)); 
+    public Board create(BoardCreateRequest boardCreateRequest) throws IOException {
+        Board board = boardRepository.save(Board.toEntity(boardCreateRequest, userRepository.findByUserId(jwtService.getLoginId())));
+        List<String> images = multiUpload.FileUpload(boardCreateRequest.getImageName());
+        for (String fileName : images) {
+            imageRepository.save(Image.toEntity(fileName,board));
+        }
         return board;
     }
 
