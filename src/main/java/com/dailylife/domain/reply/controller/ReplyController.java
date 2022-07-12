@@ -42,7 +42,7 @@ public class ReplyController {
 
     @ApiOperation(value = "댓글 확인", notes = "게시물 댓글 확인")
     @GetMapping("/getReply/{boardNum}")
-    public ResponseEntity<List<Reply>> getReply(@PathVariable("boardNum")Long boardNum, ReplyGetRequest replyGetRequest){
+    public ResponseEntity<List<Reply>> getReply(@PathVariable("boardNum")Long boardNum){
         return ResponseEntity.ok(replyService.getReplyList(boardNum));
     }
 
