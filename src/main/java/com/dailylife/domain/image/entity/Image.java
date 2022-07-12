@@ -1,6 +1,7 @@
-package com.dailylife.domain.board.entity;
+package com.dailylife.domain.image.entity;
 
-import com.dailylife.domain.board.dto.BoardImageRequest;
+import com.dailylife.domain.board.entity.Board;
+import com.dailylife.domain.image.dto.BoardImageRequest;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,9 +23,9 @@ public class Image {
     @JoinColumn(name="bno")
     Board board;
 
-    public static Image toEntity(BoardImageRequest boardImageRequest, Board board){
-        Image build = new ImageBuilder()
-                .imageName(boardImageRequest.getImgName()).build();
+    public static Image toEntity(String imageName, Board board){
+        Image build = new Image.ImageBuilder()
+               .imageName(imageName).build();
                 build.setBoard(board);
         return build;
     }

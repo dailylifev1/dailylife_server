@@ -1,9 +1,10 @@
-package com.dailylife.domain.board.dto;
+package com.dailylife.domain.image.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 @Setter
 @Getter
@@ -11,5 +12,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class BoardImageRequest {
 
-    private String imgName;
+    private MultipartFile[] imgName;
 }

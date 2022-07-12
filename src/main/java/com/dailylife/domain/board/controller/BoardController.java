@@ -11,20 +11,23 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 
 @RestController
 @RequestMapping("api/board")
 @RequiredArgsConstructor
 @Api(tags = "Board API")
+@CrossOrigin(origins = "*" , allowedHeaders = "*")
 public class BoardController {
 
     private final BoardService boardService;
 
     @ApiOperation(value = "게시물 업로드", notes = "게시물 업로드 완료")
     @PostMapping("/create")
-    public ResponseEntity<Board> createBoard(@Valid @RequestBody BoardCreateRequest boardCreateRequest){
+    public ResponseEntity<Board> createBoard(@Valid @ModelAttribute BoardCreateRequest boardCreateRequest) throws IOException {
         return ResponseEntity.ok(boardService.create(boardCreateRequest));
     }
 

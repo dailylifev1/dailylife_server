@@ -17,6 +17,7 @@ public class WebInterceptor implements HandlerInterceptor {
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT");
         response.setHeader("Access-Control-Max-Age", "3600");
         response.setHeader("Access-Control-Allow-Headers", "x-requested-with, origin, content-type, accept");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
         return true;
     }
 }

@@ -2,6 +2,7 @@ package com.dailylife.domain.board.entity;
 
 import com.dailylife.domain.board.dto.BoardCreateRequest;
 import com.dailylife.domain.board.dto.BoardUpdateRequest;
+import com.dailylife.domain.image.entity.Image;
 import com.dailylife.domain.reply.entity.Reply;
 import com.dailylife.domain.user.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;

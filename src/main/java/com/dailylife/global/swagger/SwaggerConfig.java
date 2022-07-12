@@ -54,7 +54,7 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("dailyLife api sheet")
                 .version("1.0.0")
-                .description("ㅇㅅㅇ 화이팅!")
+                .description("ㅇㅅㅇ 화이팅! v6")
                 .build();
     }
 

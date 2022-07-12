@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
 
@@ -28,6 +29,8 @@ public class BoardCreateRequest {
     @ApiModelProperty(notes = "게시물 대표 사진을 등록해주세요")
     private String thumbNail;
 
-    private String imageName; // 게시글 이미지 다중 업로드 시 사용할 컬럼으로 후에 사진 이름들이 담길 컬럼
+    private MultipartFile[] imageName;
+
+
 
 }
