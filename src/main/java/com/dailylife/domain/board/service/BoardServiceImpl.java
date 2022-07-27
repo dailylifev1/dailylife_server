@@ -10,6 +10,7 @@ import com.dailylife.domain.image.entity.Image;
 import com.dailylife.domain.image.repository.ImageRepository;
 import com.dailylife.domain.user.entity.User;
 import com.dailylife.domain.user.repository.UserRepository;
+import com.dailylife.global.fileUpload.ImageRemove;
 import com.dailylife.global.fileUpload.MultiUpload;
 import com.dailylife.global.jwt.service.JwtService;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,7 @@ public class BoardServiceImpl implements BoardService{
     private final UserRepository userRepository;
     private final ImageRepository imageRepository;
     private final MultiUpload multiUpload;
+    private final ImageRemove imageRemove;
 
     @Override
     @Transactional
@@ -46,7 +48,10 @@ public class BoardServiceImpl implements BoardService{
     @Transactional
     public Board update(BoardCreateRequest boardCreateRequest, Long boardNum) throws IOException{
         Board board = boardRepository.findBoardByBoardNum(boardNum);
-        imageRepository.deleteByBoardBoardNum(boardNum);
+        List<Image> image = imageRepository.findByBoardBoardNum(boardNum);
+        for(int i =0; i<image.size(); i++) {
+            imageRemove.deleteFile(image.get(i).getImageName()); // 기존에 존재하던 이미지 파일 삭제
+        }
         board.setTitle(boardCreateRequest.getTitle());
         board.setContent(boardCreateRequest.getContent());
         board.setThumbNail(boardCreateRequest.getThumbNail());
