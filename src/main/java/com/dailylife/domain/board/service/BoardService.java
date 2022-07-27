@@ -11,7 +11,7 @@ public interface BoardService {
 
     Board create(BoardCreateRequest boardCreateRequest) throws IOException;
 
-    boolean update(BoardUpdateRequest boardUpdateRequest);
+    Board update(BoardCreateRequest boardCreateRequest, Long boardNum) throws IOException;
 
     boolean delete(Long boardNum);
 

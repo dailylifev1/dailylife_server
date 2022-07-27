@@ -35,7 +35,7 @@ public class Board {
     @JoinColumn(name = "uno")
     User user;
 
-    @OneToMany(mappedBy = "board")
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<Image> images = new ArrayList<>();
 
