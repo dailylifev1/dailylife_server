@@ -43,9 +43,18 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public boolean update(BoardUpdateRequest boardUpdateRequest) {
-        Board board = boardRepository.save(Board.toEntityUpdate(boardUpdateRequest));
-        return true;
+    @Transactional
+    public Board update(BoardCreateRequest boardCreateRequest, Long boardNum) throws IOException{
+        Board board = boardRepository.findBoardByBoardNum(boardNum);
+        imageRepository.deleteByBoardBoardNum(boardNum);
+        board.setTitle(boardCreateRequest.getTitle());
+        board.setContent(boardCreateRequest.getContent());
+        board.setThumbNail(boardCreateRequest.getThumbNail());
+        List<String> images = multiUpload.FileUpload(boardCreateRequest.getImageName());
+        for (String fileName : images) {
+            imageRepository.save(Image.toEntity(fileName,board));
+        }
+        return board;
     }
 
 //    @Override

@@ -20,7 +20,7 @@ public class Image {
     private String imageName;
 
     @ManyToOne
-    @JoinColumn(name="bno")
+    @JoinColumn(name="board_boardNum")
     Board board;
 
     public static Image toEntity(String imageName, Board board){

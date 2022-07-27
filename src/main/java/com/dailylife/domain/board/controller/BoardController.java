@@ -31,15 +31,16 @@ public class BoardController {
         return ResponseEntity.ok(boardService.create(boardCreateRequest));
     }
 
-    @ApiOperation(value = "게시물 수정", notes = "게시물 업로드 완료")
-    @PostMapping("/update")
-    public ResponseEntity<Boolean> updateBoard(@Valid @RequestBody BoardUpdateRequest boardUpdateRequest){
-        return ResponseEntity.ok(boardService.update(boardUpdateRequest));
+    @ApiOperation(value = "게시물 수정", notes = "게시물 수정 url에 boardNum 같이 넘겨주세요// 현재 게시글 수정 시 기존 사진 삭제 후 새로 등록한 사진이 업로드 ")
+    @PostMapping("/update/{boardNum}")
+    public ResponseEntity<Board> updateBoard(@PathVariable("boardNum") Long boardNum,@Valid @ModelAttribute BoardCreateRequest boardCreateRequest) throws IOException {
+        return ResponseEntity.ok(boardService.update(boardCreateRequest, boardNum));
     }
 
     @ApiOperation(value = "게시물 삭제", notes = "게시물 삭제 완료")
     @DeleteMapping("/delete/{boardNum}")
     public ResponseEntity<Boolean> deleteBoard(@PathVariable("boardNum")Long boardNum){
+
         return ResponseEntity.ok(boardService.delete(boardNum));
     }
 
