@@ -22,7 +22,7 @@ public class Heart {
     private Long heartNum;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="rno")
+    @JoinColumn(name="reply_replyNum")
     private Reply reply;
 
     private Long uno;

@@ -6,10 +6,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -21,10 +18,11 @@ public class HeartController {
 
     private final HeartService heartService;
 
-    @ApiOperation(value = "댓글 좋아요", notes = "댓글 좋아요")
-    @PostMapping("/replyHeart")
-    public ResponseEntity<Boolean> replyHeart(@Valid @RequestBody HeartStateRequest heartStateRequest){
-        System.out.println("controller");
+    @ApiOperation(value = "댓글 좋아요", notes = "rno값(tbl_reply)PK값만 넘겨주시면 됩니다.")
+    @PostMapping("/replyHeartPlus")
+    public ResponseEntity<Boolean> replyHeartPlus(@Valid @RequestBody HeartStateRequest heartStateRequest){
+        System.out.println("좋아요+");
         return ResponseEntity.ok(heartService.heartPlus(heartStateRequest));
     }
+
 }

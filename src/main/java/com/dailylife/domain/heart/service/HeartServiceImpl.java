@@ -25,22 +25,22 @@ public class HeartServiceImpl implements HeartService{
 
 
     @Override
+    @Transactional
     public boolean heartPlus(HeartStateRequest heartStateRequest) {
+
         Reply reply = new Reply();
-        System.out.println("1");
         reply.setReplyNum(heartStateRequest.getRno());
-        System.out.println("2");
         User user = userRepository.findByUserId(jwtService.getLoginId());
         heartStateRequest.setUno(user.getUserNum());
-        System.out.println("3");
-        heartStateRequest.setHeartState(1L);
-        Heart heart = heartRepository.save(Heart.toEntity(heartStateRequest, reply));
-        System.out.println("4");
+        if(heartRepository.countByReplyReplyNumAndUno(reply.getReplyNum(), user.getUserNum()) == 0){
+            heartStateRequest.setHeartState(1L);
+            Heart heart = heartRepository.save(Heart.toEntity(heartStateRequest, reply));
+        }
+        else {
+          heartRepository.deleteByReplyReplyNumAndUno(reply.getReplyNum(), user.getUserNum());
+        }
         return true;
+
     }
 
-    @Override
-    public boolean hearMinus(HeartStateRequest heartStateRequest) {
-        return false;
-    }
 }

@@ -12,7 +12,6 @@ public interface HeartService {
 
     boolean heartPlus(HeartStateRequest heartStateRequest);
 
-    boolean hearMinus(HeartStateRequest heartStateRequest);
 
 
 }
