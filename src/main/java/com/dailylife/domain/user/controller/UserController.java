@@ -5,10 +5,13 @@ import com.dailylife.domain.user.dto.UserLoginRequest;
 import com.dailylife.domain.user.dto.UserModifyRequest;
 import com.dailylife.domain.user.entity.User;
 import com.dailylife.domain.user.service.UserService;
+import com.dailylife.global.dto.ApplicationResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -29,18 +32,28 @@ public class UserController {
 
     @ApiOperation(value = "회원가입", notes = "회원가입을 합니다.")
     @PostMapping("/join")
-    public ResponseEntity<User> saveUser(@Valid @RequestBody UserJoinRequest userJoinRequest) {
-        log.info("userJoinId  By React => {}" , userJoinRequest.getUserId());
-        return ResponseEntity.ok(userService.join(userJoinRequest));
+    public ApplicationResponse<User> saveUser(@Valid @RequestBody UserJoinRequest userJoinRequest) {
+        return ApplicationResponse.create("회원가입이 완료되었습니다." , HttpStatus.CREATED , userService.join(userJoinRequest));
     }
 
     @ApiOperation(value = "로그인", notes = "로그인을 합니다.")
     @PostMapping("/login")
-    public ResponseEntity<User> loginUser(@Valid @RequestBody UserLoginRequest userLoginRequestRequest) {
-        log.info("userLoginId By React => {}" , userLoginRequestRequest.getUserId());
-        return ResponseEntity.ok(userService.login(userLoginRequestRequest));
+    public ApplicationResponse<User> loginUser(@Valid @RequestBody UserLoginRequest userLoginRequestRequest) {
+        return ApplicationResponse.create("로그인이 완료되었습니다." , HttpStatus.OK , userService.login(userLoginRequestRequest));
     }
 
+    @ApiOperation(value = "회원탈퇴" , notes = "회원을 탈퇴합니다.")
+    @DeleteMapping("/quit/{userNum}")
+    public ApplicationResponse<User> quitUser(@Valid @PathVariable Long userNum) {
+        userService.quit(userNum);
+        return ApplicationResponse.ok();
+    }
+
+    @ApiOperation(value = "내정보 보기" , notes = "내정보를 자세하게 봅니다")
+    @PostMapping("/details/{userNum}")
+    public ApplicationResponse<User> detailsUser(@Valid @PathVariable Long userNum) {
+        return ApplicationResponse.create("유저의 대한 정보입니다" , HttpStatus.OK , userService.getDetails(userNum));
+    }
 
     @PostMapping("/post")
     public String PostTest(@RequestBody String msg) {

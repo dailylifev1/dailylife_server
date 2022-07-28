@@ -5,6 +5,7 @@ import com.dailylife.domain.user.dto.UserLoginRequest;
 import com.dailylife.domain.user.dto.UserModifyRequest;
 import com.dailylife.domain.user.entity.User;
 import com.dailylife.domain.user.repository.UserRepository;
+import com.dailylife.global.exception.NotFoundException;
 import com.dailylife.global.fileUpload.SingleUpload;
 import com.dailylife.global.jwt.service.JwtService;
 import com.dailylife.global.security.SpringSecurityConfig;
@@ -72,6 +73,20 @@ public class UserServiceImpl implements UserService {
             return "프로필 사진이 업로드 되었습니다. 파일명 : " +imgName;
         }
         return null;
+    }
+
+    @Override @Transactional
+    public void quit(Long userNum) {
+        User user = userRepository.findByUserNum(userNum).orElseThrow(NotFoundException::new);
+        userRepository.delete(user);
+    }
+
+    @Override
+    public User getDetails(Long userNum) {
+
+//        User user = userRepository.findByUserNum(userNum).orElseThrow(NotFoundException::new);
+
+        return userRepository.findByUserNum(userNum).orElseThrow(NotFoundException::new);
     }
 }
 

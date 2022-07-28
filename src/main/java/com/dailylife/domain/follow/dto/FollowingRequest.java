@@ -1,4 +1,4 @@
-package com.dailylife.domain.user_follow.dto;
+package com.dailylife.domain.follow.dto;
 
 
 import io.swagger.annotations.ApiModel;
@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Getter
@@ -16,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel(description = "팔로우 요청을 위한 객체")
-public class UserFollowingRequest {
+public class FollowingRequest {
 
     @NotNull(message = "아이디를 입력해주세요")
     @ApiModelProperty(notes = "아이디를 입력해주세요")

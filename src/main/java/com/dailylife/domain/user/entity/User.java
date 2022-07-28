@@ -1,14 +1,11 @@
 package com.dailylife.domain.user.entity;
 
 import com.dailylife.domain.board.entity.Board;
-import com.dailylife.domain.heart.entity.Heart;
 import com.dailylife.domain.reply.entity.Reply;
 import com.dailylife.domain.user.dto.UserJoinRequest;
-import com.dailylife.domain.user_follow.entity.UserFollow;
+import com.dailylife.domain.follow.entity.Follow;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -49,7 +46,7 @@ public class User {
 
     @OneToMany(mappedBy = "user" , orphanRemoval = true, cascade = CascadeType.PERSIST)
     @JsonIgnore
-    private List<UserFollow> userFollows = new ArrayList<>();
+    private List<Follow> follows = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
     @JsonIgnore
@@ -68,6 +65,14 @@ public class User {
                 .userJoinDate(LocalDateTime.now())
                 .build();
     }
+
+    /*
+     public static User toEntity(UserJoinReq userJoinReq) {
+        return  User.builder()
+                .name(userJoinReq.getName())
+                .build();
+    }
+     */
 
 
 }

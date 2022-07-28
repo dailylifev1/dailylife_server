@@ -4,7 +4,6 @@ import com.dailylife.domain.heart.entity.Heart;
 import com.dailylife.domain.reply.dto.ReplyInsertRequest;
 import com.dailylife.domain.replyReply.entity.ReplyReply;
 import com.dailylife.domain.user.entity.User;
-import com.dailylife.domain.user_follow.entity.UserFollow;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -39,7 +38,6 @@ public class Reply {
 /*    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "boardNum")
     private Board board;*/
-
 
 
     @OneToMany(mappedBy = "reply" /*,cascade = CascadeType.ALL*/) // reply이 삭제되면 자동으로 heart또한 삭제

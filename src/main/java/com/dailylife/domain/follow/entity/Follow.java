@@ -1,7 +1,7 @@
-package com.dailylife.domain.user_follow.entity;
+package com.dailylife.domain.follow.entity;
 
 import com.dailylife.domain.user.entity.User;
-import com.dailylife.domain.user_follow.dto.UserFollowingRequest;
+import com.dailylife.domain.follow.dto.FollowingRequest;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -13,7 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserFollow {
+public class Follow {
 
     //1 - > 3 팔로우
     //3 을 팔로우한 1번
@@ -31,15 +31,15 @@ public class UserFollow {
 
     public void setUser(User user) {
         this.user = user;
-        user.getUserFollows().add(this);
+        user.getFollows().add(this);
     }
 
-    public static UserFollow toEntity(UserFollowingRequest userFollowRequest , User user) {
-        UserFollow userFollow = UserFollow.builder()
+    public static Follow toEntity(FollowingRequest userFollowRequest , User user) {
+        Follow follow = Follow.builder()
                 .followNum(userFollowRequest.getFollowNum())
                 .build();
-        userFollow.setUser(user);
-        return userFollow;
+        follow.setUser(user);
+        return follow;
     }
 
 }

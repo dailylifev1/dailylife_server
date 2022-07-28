@@ -25,12 +25,6 @@ import java.util.List;
 @EnableSwagger2
 public class SwaggerConfig {
 
-    /**
-     * git - jira test by dm
-     * git - jira test by ygp
-     * git - jira test2 by dm
-     */
-
     @Bean
     public Docket restAPI() {
         List<Parameter> global = new ArrayList<>();
