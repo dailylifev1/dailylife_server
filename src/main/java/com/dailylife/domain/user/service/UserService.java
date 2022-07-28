@@ -18,4 +18,7 @@ public interface UserService {
 
     String modifyProfileImg(MultipartFile img) throws IOException;
 
+    void quit(Long userNum);
+
+    User getDetails(Long userNum);
 }

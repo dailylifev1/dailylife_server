@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://146.56.39.196:3306/dailylife?useUnicode=yes&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Seoul
-    username: dailylife
-    password: 1234
+    url: jdbc:mysql://localhost:3306/jpashop?useUnicode=yes&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Seoul
+    username: sa
+    password: km971gb5!!
 
   mvc:
     pathmatch:
@@ -15,7 +15,7 @@ spring:
 
     properties:
       hibernate:
-        show_sql: true
+        show_sql: false
         format_sql: true
     database-platform: org.hibernate.dialect.MySQL5Dialect
     defer-datasource-initialization: true

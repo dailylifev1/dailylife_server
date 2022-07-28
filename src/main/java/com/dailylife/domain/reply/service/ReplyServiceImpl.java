@@ -17,8 +17,6 @@ import java.util.Optional;
 public class ReplyServiceImpl implements ReplyService{
     private final ReplyRepository replyRepository;
 
-
-
     @Override
     @Transactional
     public Reply insert(ReplyInsertRequest replyInsertRequest) {
