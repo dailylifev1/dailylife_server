@@ -25,8 +25,8 @@ public class ReplyInsertRequest {
 
     private Long boardNum;
 
- /*   public Reply toEntity(User user) {
-        Reply reply = new Reply();
+ /*   public ReplyReply toEntity(User user) {
+        ReplyReply reply = new ReplyReply();
         reply.setReplyContext(replyContext);
         reply.setUser(user);
         reply.setReplyTime(LocalDateTime.now());

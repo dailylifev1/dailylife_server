@@ -35,7 +35,7 @@ public class ReplyController {
     }
 
     @ApiOperation(value = "댓글 삭제", notes = "댓글 삭제 완료")
-    @DeleteMapping("/delete/{replyId}")
+    @DeleteMapping("/delete/{replyNum}")
     public ResponseEntity<Boolean> deleteReply(@PathVariable("replyNum")Long replyNum, ReplyDeleteRequest replyDeleteRequest){
         return ResponseEntity.ok(replyService.delete(replyNum));
     }
