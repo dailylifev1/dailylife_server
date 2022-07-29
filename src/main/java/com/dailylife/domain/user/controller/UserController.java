@@ -54,7 +54,6 @@ public class UserController {
         return ApplicationResponse.create("유저의 대한 정보입니다" , HttpStatus.OK , userService.getDetails(userNum));
     }
 
-
     @PostMapping("/post")
     public String PostTest(@RequestBody String msg) {
         return "post success!!!"+msg;

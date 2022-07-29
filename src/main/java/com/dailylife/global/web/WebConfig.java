@@ -24,6 +24,7 @@ public class WebConfig implements WebMvcConfigurer {
     /**
      * Cors 문제 해결 설정
      */
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")

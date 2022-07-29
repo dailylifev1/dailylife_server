@@ -3,12 +3,11 @@ package com.dailylife.domain.user.dto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.apache.tomcat.jni.Local;
 
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -16,6 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel(description = "로그인을 위한 요청 객체")
+@Builder
 public class UserJoinRequest {
 
     @NotBlank(message = "아이디를 입력해주세요")
@@ -38,7 +38,7 @@ public class UserJoinRequest {
     @ApiModelProperty(notes = "이메일을 입력해주세요")
     private String userEmail;
 
-    private Date userJoinDate;
+    private LocalDateTime userJoinDate;
 
     private String userProfileImg;
 
