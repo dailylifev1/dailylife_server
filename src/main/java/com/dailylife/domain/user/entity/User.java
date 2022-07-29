@@ -48,7 +48,7 @@ public class User {
     @JsonIgnore
     private List<Follow> follows = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user" , orphanRemoval = true, cascade = CascadeType.PERSIST)
     @JsonIgnore
     private List<Reply> replies = new ArrayList<>();
 

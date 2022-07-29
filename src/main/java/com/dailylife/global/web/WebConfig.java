@@ -21,16 +21,9 @@ public class WebConfig implements WebMvcConfigurer {
     public static final String ALLOWED_METHOD_NAMES = "GET,HEAD,POST,PUT,DELETE,TRACE,OPTIONS,PATCH";
     private final JwtService jwtService;
 
-    @Bean
-    public FilterRegistrationBean getFilterRegistrationBean() {
-        FilterRegistrationBean registrationBean = new FilterRegistrationBean(new CorsFilter());
-        registrationBean.setOrder(Integer.MIN_VALUE);
-        registrationBean.addUrlPatterns("/*");
-//        registrationBean.setUrlPatterns(Arrays.asList("/board/*"));
-        return registrationBean;
-    }
-
-
+    /**
+     * Cors 문제 해결 설정
+     */
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
@@ -39,26 +32,10 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedHeaders("*")
                 .exposedHeaders("*")
                 .allowedMethods(ALLOWED_METHOD_NAMES.split(","));
-
-
-
-
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-
-//        registry.addInterceptor(new WebInterceptor()).
-//                order(1).
-//                addPathPatterns("/**").
-//                excludePathPatterns(
-//                        "/swagger-ui.html",
-//                        "/swagger-ui/**" ,
-//                        "/swagger-resources/**",
-//                        "/webjars/**",
-//                        "/api/users/join",
-//                        "/api/users/login"
-//                        ,"/error");
 
             registry.addInterceptor(new JwtInterceptor(jwtService)).
                     order(1).
