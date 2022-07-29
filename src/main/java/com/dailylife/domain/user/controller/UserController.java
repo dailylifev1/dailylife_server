@@ -25,7 +25,6 @@ import java.io.IOException;
 @RequestMapping("api/users")
 @RequiredArgsConstructor
 @Api(tags = "User API")
-@CrossOrigin(origins = "*" , allowedHeaders = "*")
 public class UserController {
 
     private final UserService userService;
@@ -54,6 +53,7 @@ public class UserController {
     public ApplicationResponse<User> detailsUser(@Valid @PathVariable Long userNum) {
         return ApplicationResponse.create("유저의 대한 정보입니다" , HttpStatus.OK , userService.getDetails(userNum));
     }
+
 
     @PostMapping("/post")
     public String PostTest(@RequestBody String msg) {

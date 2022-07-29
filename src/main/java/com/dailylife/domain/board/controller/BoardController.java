@@ -20,7 +20,6 @@ import java.io.IOException;
 @RequestMapping("api/board")
 @RequiredArgsConstructor
 @Api(tags = "Board API")
-@CrossOrigin(origins = "*" , allowedHeaders = "*")
 public class BoardController {
 
     private final BoardService boardService;
