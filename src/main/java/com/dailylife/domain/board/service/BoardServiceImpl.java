@@ -2,8 +2,10 @@ package com.dailylife.domain.board.service;
 
 import com.dailylife.domain.board.dto.BoardCreateRequest;
 import com.dailylife.domain.board.dto.BoardDeleteRequest;
+import com.dailylife.domain.board.dto.BoardPagination;
 import com.dailylife.domain.board.dto.BoardUpdateRequest;
 import com.dailylife.domain.board.entity.Board;
+import com.dailylife.domain.board.repository.BoardPaginationRepository;
 import com.dailylife.domain.board.repository.BoardRepository;
 import com.dailylife.domain.image.dto.BoardImageRequest;
 import com.dailylife.domain.image.entity.Image;
@@ -33,13 +35,17 @@ public class BoardServiceImpl implements BoardService{
     private final MultiUpload multiUpload;
     private final ImageRemove imageRemove;
 
+    private final BoardPaginationRepository paginationRepository;
+
     @Override
     @Transactional
     public Board create(BoardCreateRequest boardCreateRequest) throws IOException {
         Board board = boardRepository.save(Board.toEntity(boardCreateRequest, userRepository.findByUserId(jwtService.getLoginId())));
+        if(boardCreateRequest.getImageName() != null) {
         List<String> images = multiUpload.FileUpload(boardCreateRequest.getImageName());
-        for (String fileName : images) {
-            imageRepository.save(Image.toEntity(fileName,board));
+            for (String fileName : images) {
+                imageRepository.save(Image.toEntity(fileName, board));
+            }
         }
         return board;
     }
@@ -55,27 +61,14 @@ public class BoardServiceImpl implements BoardService{
         board.setTitle(boardCreateRequest.getTitle());
         board.setContent(boardCreateRequest.getContent());
         board.setThumbNail(boardCreateRequest.getThumbNail());
+        if(boardCreateRequest.getImageName() != null) {
         List<String> images = multiUpload.FileUpload(boardCreateRequest.getImageName());
-        for (String fileName : images) {
-            imageRepository.save(Image.toEntity(fileName,board));
+            for (String fileName : images) {
+                imageRepository.save(Image.toEntity(fileName, board));
+            }
         }
         return board;
     }
-
-//    @Override
-//    @Transactional
-//    public boolean update2(BoardUpdateRequest boardUpdateRequest) {
-//        //boradNum
-//        /*
-//        save -> update -> 전체를 그냥 다 업데이트 update -> null인거는 업데이트 안하고 , 값들어있는것만
-//        Board board = boardRepository.findByBoardNum(Long boardNum)
-//        board.set(boardUpdateRequest.get(
-//         */
-//
-//        Board board = boardRepository.save(Board.toEntityUpdate(boardUpdateRequest));
-//        return true;
-//    }
-
 
     @Override
     public boolean delete(Long boardNum) {
@@ -83,4 +76,8 @@ public class BoardServiceImpl implements BoardService{
         return true;
     }
 
+    @Override
+    public List<Board> getPage(BoardPagination pagination) {
+        return paginationRepository.findAll(pagination);
+    }
 }

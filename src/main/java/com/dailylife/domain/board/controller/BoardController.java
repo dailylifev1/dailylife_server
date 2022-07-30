@@ -1,6 +1,7 @@
 package com.dailylife.domain.board.controller;
 
 import com.dailylife.domain.board.dto.BoardCreateRequest;
+import com.dailylife.domain.board.dto.BoardPagination;
 import com.dailylife.domain.board.dto.BoardUpdateRequest;
 import com.dailylife.domain.board.entity.Board;
 import com.dailylife.domain.board.service.BoardService;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/board")
@@ -41,6 +43,11 @@ public class BoardController {
     public ResponseEntity<Boolean> deleteBoard(@PathVariable("boardNum")Long boardNum){
 
         return ResponseEntity.ok(boardService.delete(boardNum));
+    }
+    @ApiOperation(value = "페이징 게시글 가져오기", notes = "한 페이지 당 15개 게시글 가져옴, pg(현재 페이지)만 넘겨주시면 됩니다")
+    @GetMapping("/getBoard/{pg}")
+    public ResponseEntity<List<Board>> list(@PathVariable("pg")int pg, BoardPagination pagination) {
+        return ResponseEntity.ok(boardService.getPage(pagination));
     }
 
 

@@ -16,7 +16,7 @@ public class SingleUpload {
 
     public String FileUpload(MultipartFile file) throws IOException {
 
-        String uploadPath = "C:\\dailylife_server3\\src\\main\\resources\\images"; // 우선 절대경로 설정
+        String uploadPath = "/profileImg"; // 우선 절대경로 설정
 
         File target = new File(uploadPath);
         if (!target.exists()) target.mkdirs(); // 파일 경로에 폴더 없으면 새로운 폴더 생성
