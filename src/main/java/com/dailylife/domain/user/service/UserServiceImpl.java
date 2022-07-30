@@ -31,6 +31,9 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User join(UserJoinRequest userJoinRequest) {
+        if(userRepository.countByUserId(userJoinRequest.getUserId()) !=0){
+            throw new RuntimeException("이미 존재하는 ID입니다");
+        }
         String enPw = springSecurity.passwordEncoder().encode(userJoinRequest.getUserPassword()); // 스프링시큐리티로 pw 암호화
         userJoinRequest.setUserPassword(enPw);
         User user = userRepository.save(User.toEntity(userJoinRequest));
