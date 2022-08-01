@@ -3,9 +3,11 @@ package com.dailylife.domain.follow.controller;
 import com.dailylife.domain.follow.dto.FollowingRequest;
 import com.dailylife.domain.follow.entity.Follow;
 import com.dailylife.domain.follow.service.FollowingService;
+import com.dailylife.global.dto.ApplicationResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,9 +46,9 @@ public class FollowingController {
 
     @ApiOperation(value = "팔로우를 확인합니다", notes = "팔로우를 확인합니다.")
     @PostMapping("/getFollow")
-    public String getFollow() {
-        followingService.getFollow();
-            return null;
+    public ApplicationResponse<List<Follow>> getFollow() {
+        List<Follow> follow = followingService.getFollow();
+        return ApplicationResponse.create("팔로워를 불러왔습니다" , HttpStatus.CREATED , follow);
     }
 
 }
