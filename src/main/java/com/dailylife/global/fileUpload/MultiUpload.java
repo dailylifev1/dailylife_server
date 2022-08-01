@@ -15,7 +15,7 @@ import java.util.UUID;
 @Log4j2
 public class MultiUpload {
         public List<String> FileUpload(MultipartFile[] file) throws IOException {
-            String uploadPath = "/images"; // 우선 절대경로 설정
+            String uploadPath = "/home/ubuntu/images"; // 우선 절대경로 설정
 //            String uploadPath = "C:\\Users\\sdm03\\OneDrive\\바탕 화면\\dailylife (1)\\dailylife_server3\\src\\main\\resources\\images";
 
             ArrayList<String> fileName = new ArrayList<>(); // 파일 이름들을 저장할 리스트 생성
@@ -39,7 +39,6 @@ public class MultiUpload {
                 target = new File(uploadPath, saveFileName);
                 file[i].transferTo(target);
                 fileName.add(saveFileName); // 리스트에 파일이름 갯수만큼 저장
-
 
             }
             return fileName; // 리스트 리턴

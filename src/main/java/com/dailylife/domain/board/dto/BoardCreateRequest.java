@@ -31,6 +31,4 @@ public class BoardCreateRequest {
 
     private MultipartFile[] imageName;
 
-
-
 }

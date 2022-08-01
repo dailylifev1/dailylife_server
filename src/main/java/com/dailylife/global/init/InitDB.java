@@ -28,7 +28,7 @@ public class InitDB {
         if(ddlAutoConfig.equals("create")){
 
             UserJoinRequest userReq1 = UserJoinRequest.builder()
-                    .userId("d1")
+                    .userId("dl1")
                     .userPassword("dl")
                     .userName("dailyLife")
                     .userEmail("dailyLife.dev@gmail.com").userJoinDate(LocalDateTime.now()).build();
