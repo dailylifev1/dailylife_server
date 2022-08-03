@@ -1,9 +1,6 @@
 package com.dailylife.domain.board.service;
 
-import com.dailylife.domain.board.dto.BoardCreateRequest;
-import com.dailylife.domain.board.dto.BoardDeleteRequest;
-import com.dailylife.domain.board.dto.BoardPagination;
-import com.dailylife.domain.board.dto.BoardUpdateRequest;
+import com.dailylife.domain.board.dto.*;
 import com.dailylife.domain.board.entity.Board;
 import com.dailylife.domain.board.repository.BoardPaginationRepository;
 import com.dailylife.domain.board.repository.BoardRepository;
@@ -19,9 +16,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.swing.text.html.parser.Entity;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -34,20 +33,24 @@ public class BoardServiceImpl implements BoardService{
     private final ImageRepository imageRepository;
     private final MultiUpload multiUpload;
     private final ImageRemove imageRemove;
-
     private final BoardPaginationRepository paginationRepository;
 
     @Override
     @Transactional
-    public Board create(BoardCreateRequest boardCreateRequest) throws IOException {
+    public BoardCreateResponse create(BoardCreateRequest boardCreateRequest) throws IOException {
+        List<String> originalFileName = new ArrayList<>();
         Board board = boardRepository.save(Board.toEntity(boardCreateRequest, userRepository.findByUserId(jwtService.getLoginId())));
         if(boardCreateRequest.getImageName() != null) {
-        List<String> images = multiUpload.FileUpload(boardCreateRequest.getImageName());
+            for (MultipartFile file : boardCreateRequest.getImageName()) {
+                originalFileName.add(file.getOriginalFilename());
+            }
+            List<String> images = multiUpload.FileUpload(boardCreateRequest.getImageName());
             for (String fileName : images) {
+
                 imageRepository.save(Image.toEntity(fileName, board));
             }
         }
-        return board;
+        return BoardCreateResponse.from(board , originalFileName);
     }
 
     @Override

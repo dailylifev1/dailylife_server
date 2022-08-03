@@ -1,6 +1,7 @@
 package com.dailylife.domain.board.controller;
 
 import com.dailylife.domain.board.dto.BoardCreateRequest;
+import com.dailylife.domain.board.dto.BoardCreateResponse;
 import com.dailylife.domain.board.dto.BoardPagination;
 import com.dailylife.domain.board.dto.BoardUpdateRequest;
 import com.dailylife.domain.board.entity.Board;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -28,7 +30,7 @@ public class BoardController {
 
     @ApiOperation(value = "게시물 업로드", notes = "게시물 업로드 완료")
     @PostMapping("/create")
-    public ResponseEntity<Board> createBoard(@Valid @ModelAttribute BoardCreateRequest boardCreateRequest) throws IOException {
+    public ResponseEntity<BoardCreateResponse> createBoard(@Valid @ModelAttribute BoardCreateRequest boardCreateRequest) throws IOException {
         return ResponseEntity.ok(boardService.create(boardCreateRequest));
     }
 
