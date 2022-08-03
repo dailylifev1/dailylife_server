@@ -52,6 +52,7 @@ public class WebConfig implements WebMvcConfigurer {
                             "/api/users/loginTest"
                             ,"/error");
 
+
     }
 
     @Override
