@@ -50,7 +50,7 @@ public class WebConfig implements WebMvcConfigurer {
                             "/api/users/login",
                             "/api/users/joinTest",
                             "/api/users/loginTest"
-                            ,"/error");
+                            ,"/error","/boardImg/**");
 
 
     }
@@ -62,5 +62,8 @@ public class WebConfig implements WebMvcConfigurer {
 
         registry.addResourceHandler("/webjars/**")
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
+
+        registry.addResourceHandler("/boardImg/**")
+                .addResourceLocations("file:////home/ubuntu/images/");
     }
 }

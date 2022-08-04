@@ -9,14 +9,15 @@ import com.dailylife.domain.board.service.BoardService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpRequest;
-import org.springframework.http.ResponseEntity;
+import org.apache.commons.io.IOUtils;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +52,5 @@ public class BoardController {
     public ResponseEntity<List<Board>> list(@PathVariable("pg")int pg, BoardPagination pagination) {
         return ResponseEntity.ok(boardService.getPage(pagination));
     }
-
-
 
 }
