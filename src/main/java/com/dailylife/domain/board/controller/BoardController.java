@@ -1,24 +1,18 @@
 package com.dailylife.domain.board.controller;
 
 import com.dailylife.domain.board.dto.BoardCreateRequest;
-import com.dailylife.domain.board.dto.BoardCreateResponse;
+import com.dailylife.domain.board.dto.BoardCreateAndGetResponse;
 import com.dailylife.domain.board.dto.BoardPagination;
-import com.dailylife.domain.board.dto.BoardUpdateRequest;
 import com.dailylife.domain.board.entity.Board;
 import com.dailylife.domain.board.service.BoardService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.io.IOUtils;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -31,7 +25,7 @@ public class BoardController {
 
     @ApiOperation(value = "게시물 업로드", notes = "게시물 업로드 완료")
     @PostMapping("/create")
-    public ResponseEntity<BoardCreateResponse> createBoard(@Valid @ModelAttribute BoardCreateRequest boardCreateRequest) throws IOException {
+    public ResponseEntity<BoardCreateAndGetResponse> createBoard(@Valid @ModelAttribute BoardCreateRequest boardCreateRequest) throws IOException {
         return ResponseEntity.ok(boardService.create(boardCreateRequest));
     }
 
@@ -49,7 +43,7 @@ public class BoardController {
     }
     @ApiOperation(value = "페이징 게시글 가져오기", notes = "한 페이지 당 15개 게시글 가져옴, pg(현재 페이지)만 넘겨주시면 됩니다")
     @GetMapping("/getBoard/{pg}")
-    public ResponseEntity<List<Board>> list(@PathVariable("pg")int pg, BoardPagination pagination) {
+    public ResponseEntity<List<BoardCreateAndGetResponse>> list(@PathVariable("pg")int pg, BoardPagination pagination) {
         return ResponseEntity.ok(boardService.getPage(pagination));
     }
 

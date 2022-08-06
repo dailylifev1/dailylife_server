@@ -8,12 +8,12 @@ import java.util.List;
 
 public interface BoardService {
 
-    BoardCreateResponse create(BoardCreateRequest boardCreateRequest) throws IOException;
+    BoardCreateAndGetResponse create(BoardCreateRequest boardCreateRequest) throws IOException;
 
     Board update(BoardCreateRequest boardCreateRequest, Long boardNum) throws IOException;
 
     boolean delete(Long boardNum);
 
-    List<Board> getPage(BoardPagination pagination);
+    List<BoardCreateAndGetResponse> getPage(BoardPagination pagination);
 
 }
