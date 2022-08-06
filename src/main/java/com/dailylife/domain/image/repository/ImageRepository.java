@@ -9,6 +9,5 @@ import java.util.List;
 
 public interface ImageRepository extends JpaRepository<Image, Long> {
    void deleteByBoardBoardNum(@Param(value="boardNum") Long boardNum);
-
    List<Image> findByBoardBoardNum(@Param(value="boardNum") Long boardNum);
 }

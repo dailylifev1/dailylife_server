@@ -48,9 +48,9 @@ public class WebConfig implements WebMvcConfigurer {
                             "/webjars/**",
                             "/api/users/join",
                             "/api/users/login",
-                            "/api/users/joinTest",
-                            "/api/users/loginTest"
-                            ,"/error","/boardImg/**");
+                            "/error",
+                            "/boardImg/**",
+                            "/api/board/getBoard/**");
 
 
     }

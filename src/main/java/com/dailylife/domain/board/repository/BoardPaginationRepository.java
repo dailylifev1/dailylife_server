@@ -12,7 +12,7 @@ import java.util.List;
 public interface BoardPaginationRepository extends JpaRepository<Board, Long> {
     public default List<Board> findAll(BoardPagination pagination) {
         Page<Board> page = this.findAll(PageRequest.of(pagination.getPg() - 1, pagination.getSz(),
-                Sort.Direction.ASC, "boardNum"));
+                Sort.Direction.DESC, "boardNum"));
         pagination.setRecordCount((int)page.getTotalElements());
         return page.getContent();
     }

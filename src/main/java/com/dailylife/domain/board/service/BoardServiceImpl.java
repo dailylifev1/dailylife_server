@@ -4,10 +4,8 @@ import com.dailylife.domain.board.dto.*;
 import com.dailylife.domain.board.entity.Board;
 import com.dailylife.domain.board.repository.BoardPaginationRepository;
 import com.dailylife.domain.board.repository.BoardRepository;
-import com.dailylife.domain.image.dto.BoardImageRequest;
 import com.dailylife.domain.image.entity.Image;
 import com.dailylife.domain.image.repository.ImageRepository;
-import com.dailylife.domain.user.entity.User;
 import com.dailylife.domain.user.repository.UserRepository;
 import com.dailylife.global.fileUpload.ImageRemove;
 import com.dailylife.global.fileUpload.MultiUpload;
@@ -16,9 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.swing.text.html.parser.Entity;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,22 +31,22 @@ public class BoardServiceImpl implements BoardService{
     private final ImageRemove imageRemove;
     private final BoardPaginationRepository paginationRepository;
 
+    private static String ServerUrl = "http://146.56.39.196:8080/boardImg/";
+
     @Override
     @Transactional
-    public BoardCreateResponse create(BoardCreateRequest boardCreateRequest) throws IOException {
-        List<String> originalFileName = new ArrayList<>();
+    public BoardCreateAndGetResponse create(BoardCreateRequest boardCreateRequest) throws IOException {
         Board board = boardRepository.save(Board.toEntity(boardCreateRequest, userRepository.findByUserId(jwtService.getLoginId())));
+        List<String> images = new ArrayList<>();
+        List<String> ServerFileUrl = new ArrayList<>();
         if(boardCreateRequest.getImageName() != null) {
-            for (MultipartFile file : boardCreateRequest.getImageName()) {
-                originalFileName.add(file.getOriginalFilename());
-            }
-            List<String> images = multiUpload.FileUpload(boardCreateRequest.getImageName());
+            images = multiUpload.FileUpload(boardCreateRequest.getImageName());
             for (String fileName : images) {
-
+                ServerFileUrl.add(ServerUrl+fileName);
                 imageRepository.save(Image.toEntity(fileName, board));
             }
         }
-        return BoardCreateResponse.from(board , originalFileName);
+        return BoardCreateAndGetResponse.from(board , images ,ServerFileUrl);
     }
 
     @Override
@@ -80,7 +76,18 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public List<Board> getPage(BoardPagination pagination) {
-        return paginationRepository.findAll(pagination);
+    public List<BoardCreateAndGetResponse> getPage(BoardPagination pagination) {
+        List<BoardCreateAndGetResponse> BoardCreateAndGetResponseList = new ArrayList<>();
+        for (Board board : paginationRepository.findAll(pagination)) {
+            List<String> serverFileUrl = new ArrayList<>();
+            List<String> imageNameList = new ArrayList<>();
+            List<Image> byBoardBoardNum = imageRepository.findByBoardBoardNum(board.getBoardNum());
+            for (Image image : byBoardBoardNum) {
+                imageNameList.add(image.getImageName());
+                serverFileUrl.add(ServerUrl+image.getImageName());
+            }
+            BoardCreateAndGetResponseList.add(BoardCreateAndGetResponse.from(board , imageNameList , serverFileUrl));
+        }
+        return BoardCreateAndGetResponseList;
     }
 }
