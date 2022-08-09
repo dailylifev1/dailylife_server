@@ -16,4 +16,6 @@ public interface BoardService {
 
     List<BoardCreateAndGetResponse> getPage(BoardPagination pagination);
 
+    int getBoardCount();
+
 }
