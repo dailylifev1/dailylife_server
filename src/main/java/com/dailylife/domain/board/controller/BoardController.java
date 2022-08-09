@@ -47,4 +47,10 @@ public class BoardController {
         return ResponseEntity.ok(boardService.getPage(pagination));
     }
 
+    @ApiOperation(value = "전체 게시글 수 가져오기", notes = "등록된 게시물 수 가져오기")
+    @GetMapping("/getBoardCount")
+    public ResponseEntity<Integer> getBoardCount() {
+        return ResponseEntity.ok(boardService.getBoardCount());
+    }
+
 }

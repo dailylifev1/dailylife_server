@@ -90,4 +90,9 @@ public class BoardServiceImpl implements BoardService{
         }
         return BoardCreateAndGetResponseList;
     }
+
+    @Override
+    public int getBoardCount() {
+        return boardRepository.countAllByBoardNum();
+    }
 }
