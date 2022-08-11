@@ -95,4 +95,9 @@ public class BoardServiceImpl implements BoardService{
     public int getBoardCount() {
         return boardRepository.countAllByBoardNum();
     }
+
+    @Override
+    public List<Board> TitleList(BoardPagination pagination) {
+        return paginationRepository.findTitle(pagination);
+    }
 }
