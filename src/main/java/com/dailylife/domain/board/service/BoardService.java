@@ -18,4 +18,6 @@ public interface BoardService {
 
     int getBoardCount();
 
+    List<Board> TitleList(BoardPagination pagination);
+
 }

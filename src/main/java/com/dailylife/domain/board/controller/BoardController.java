@@ -41,9 +41,10 @@ public class BoardController {
 
         return ResponseEntity.ok(boardService.delete(boardNum));
     }
-    @ApiOperation(value = "페이징 게시글 가져오기", notes = "한 페이지 당 15개 게시글 가져옴, pg(현재 페이지)만 넘겨주시면 됩니다")
-    @GetMapping("/getBoard/{pg}")
-    public ResponseEntity<List<BoardCreateAndGetResponse>> list(@PathVariable("pg")int pg, BoardPagination pagination) {
+    @ApiOperation(value = "페이징 게시글 가져오기", notes = "한 페이지 당 15개 게시글 가져옴, queryString 사용하여 pg(몇 페이지)는 필수로 넘겨주시고 query(검색어)는 있으면 채워서 보내주시면 됩니다(선택)")
+    @GetMapping("/getBoard")
+    public ResponseEntity<List<BoardCreateAndGetResponse>> list(@RequestParam(value = "pg", defaultValue = "1") int pg,@RequestParam(value = "keyword",defaultValue = "") String keyword, BoardPagination pagination) {
+        System.out.println(pagination.getKeyword());
         return ResponseEntity.ok(boardService.getPage(pagination));
     }
 
