@@ -12,7 +12,7 @@ public class ApplicationExceptionHandler {
 
     @ExceptionHandler(ApplicationException.class)
     public ResponseEntity<ErrorResponse> globalRuntimeException(ApplicationException e) {
-        ErrorResponse errorResponse = new ErrorResponse(e.getErrorCode(), e.getMessage());
+        ErrorResponse errorResponse = new ErrorResponse(e.getErrorCode(), e.getMessage() , e.getLocalDateTime());
         return ResponseEntity.ok(errorResponse);
     }
 
