@@ -3,9 +3,11 @@ package com.dailylife.domain.user.service;
 import com.dailylife.domain.user.dto.UserJoinRequest;
 import com.dailylife.domain.user.dto.UserLoginRequest;
 import com.dailylife.domain.user.dto.UserModifyRequest;
+import com.dailylife.domain.user.dto.UserPagination;
 import com.dailylife.domain.user.entity.User;
 import com.dailylife.domain.user.exception.NotFoundUserException;
 import com.dailylife.domain.user.exception.UserException;
+import com.dailylife.domain.user.repository.UserPaginationRepository;
 import com.dailylife.domain.user.repository.UserRepository;
 import com.dailylife.global.fileUpload.SingleUpload;
 import com.dailylife.global.jwt.service.JwtService;
@@ -17,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -24,6 +27,8 @@ import java.io.IOException;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+
+    private final UserPaginationRepository userPaginationRepository;
     private final SpringSecurityConfig springSecurity;
     private final SingleUpload singleUpload;
     private final JwtService jwtService;
@@ -91,5 +96,15 @@ public class UserServiceImpl implements UserService {
 
         return userRepository.findByUserNum(userNum).orElseThrow(NotFoundUserException::new);
     }
+
+    @Override
+    public List<User> findUser(UserPagination userPagination) {
+        List<User> user = userPaginationRepository.findAll(userPagination);
+        if (user.isEmpty()) throw new NotFoundUserException();
+        return user;
+
+    }
+
+
 }
 

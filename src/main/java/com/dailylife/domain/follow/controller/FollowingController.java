@@ -48,7 +48,7 @@ public class FollowingController {
     @PostMapping("/getFollow")
     public ApplicationResponse<List<Follow>> getFollow() {
         List<Follow> follow = followingService.getFollow();
-        return ApplicationResponse.create("팔로워를 불러왔습니다" , HttpStatus.CREATED , follow);
+        return ApplicationResponse.create("팔로워를 불러왔습니다" , 200 , follow);
     }
 
 }

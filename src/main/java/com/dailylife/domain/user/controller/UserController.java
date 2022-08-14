@@ -3,6 +3,7 @@ package com.dailylife.domain.user.controller;
 import com.dailylife.domain.user.dto.UserJoinRequest;
 import com.dailylife.domain.user.dto.UserLoginRequest;
 import com.dailylife.domain.user.dto.UserModifyRequest;
+import com.dailylife.domain.user.dto.UserPagination;
 import com.dailylife.domain.user.entity.User;
 import com.dailylife.domain.user.service.UserService;
 import com.dailylife.global.dto.ApplicationResponse;
@@ -19,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -32,13 +34,13 @@ public class UserController {
     @ApiOperation(value = "회원가입", notes = "회원가입을 합니다.")
     @PostMapping("/join")
     public ApplicationResponse<User> saveUser(@Valid @RequestBody UserJoinRequest userJoinRequest) {
-        return ApplicationResponse.create("회원가입이 완료되었습니다." , HttpStatus.CREATED , userService.join(userJoinRequest));
+        return ApplicationResponse.create("회원가입이 완료되었습니다." , 200 , userService.join(userJoinRequest));
     }
 
     @ApiOperation(value = "로그인", notes = "로그인을 합니다.")
     @PostMapping("/login")
     public ApplicationResponse<User> loginUser(@Valid @RequestBody UserLoginRequest userLoginRequestRequest) {
-        return ApplicationResponse.create("로그인이 완료되었습니다." , HttpStatus.OK , userService.login(userLoginRequestRequest));
+        return ApplicationResponse.create("로그인이 완료되었습니다." , 200 , userService.login(userLoginRequestRequest));
     }
 
     @ApiOperation(value = "회원탈퇴" , notes = "회원을 탈퇴합니다.")
@@ -51,8 +53,17 @@ public class UserController {
     @ApiOperation(value = "내정보 보기" , notes = "내정보를 자세하게 봅니다")
     @PostMapping("/details/{userNum}")
     public ApplicationResponse<User> detailsUser(@Valid @PathVariable Long userNum) {
-        return ApplicationResponse.create("유저의 대한 정보입니다" , HttpStatus.OK , userService.getDetails(userNum));
+        return ApplicationResponse.create("유저의 대한 정보입니다" , 200 , userService.getDetails(userNum));
     }
+
+    @ApiOperation(value = "유저찾기" , notes = "특정 유저를 찾고 그것과 유사한 name을 가진 유저를 전부 찾습니다.")
+    @PostMapping("/find")
+    public ApplicationResponse<List<User>> findUser(@Valid UserPagination userPagination) {
+        return ApplicationResponse.create("유저에 대한 정보입니다." , 250,  userService.findUser(userPagination));
+    }
+
+
+
 
     @PostMapping("/post")
     public String PostTest(@RequestBody String msg) {

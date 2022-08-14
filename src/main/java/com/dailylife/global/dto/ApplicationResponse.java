@@ -15,32 +15,26 @@ import java.time.LocalDateTime;
 public class ApplicationResponse<T> {
 
         private String message;
-        private boolean success;
         private int httpCode;
-        private HttpStatus httpStatus;
         private T data;
         private LocalDateTime localDateTime;
 
-    public static <T> ApplicationResponse<T> create(String message, HttpStatus httpStatus,
+    public static <T> ApplicationResponse<T> create(String message, int httpCode,
                                                     T data){
         return (ApplicationResponse<T>)
                 ApplicationResponse.builder()
-                .httpCode(httpStatus.value())
+                .httpCode(httpCode)
                 .localDateTime(LocalDateTime.now())
                 .message(message)
-                .httpStatus(httpStatus)
                 .data(data)
-                .success(true)
                 .build();
     }
 
     public static <T> ApplicationResponse<T> ok(){
         return (ApplicationResponse<T>) ApplicationResponse.builder()
                 .data(null)
-                .success(true)
                 .localDateTime(LocalDateTime.now())
                 .message("성공")
-                .httpStatus(HttpStatus.OK)
                 .build();
     }
 
