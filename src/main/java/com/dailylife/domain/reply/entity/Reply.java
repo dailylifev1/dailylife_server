@@ -40,7 +40,7 @@ public class Reply {
     private Board board;*/
 
 
-    @OneToMany(mappedBy = "reply" /*,cascade = CascadeType.ALL*/) // reply이 삭제되면 자동으로 heart또한 삭제
+    @OneToMany(mappedBy = "reply" ,cascade = CascadeType.ALL) // reply이 삭제되면 자동으로 heart또한 삭제
     @JsonIgnore
     private List<Heart> hearts = new ArrayList<>();
 

@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface HeartService {
-
-    boolean heartPlus(HeartStateRequest heartStateRequest);
+    /*댓글 좋아요 UP / 좋아요 취소*/
+    boolean heartPlusReply(HeartStateRequest heartStateRequest);
+    /*게시글 좋아요 UP / 좋아요 취소*/
+    boolean heartPlusBoard(HeartStateRequest heartStateRequest);
 
 
 

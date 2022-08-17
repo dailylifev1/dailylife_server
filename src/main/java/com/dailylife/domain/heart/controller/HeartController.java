@@ -18,11 +18,18 @@ public class HeartController {
 
     private final HeartService heartService;
 
-    @ApiOperation(value = "댓글 좋아요", notes = "rno값(tbl_reply)PK값만 넘겨주시면 됩니다.")
+    @ApiOperation(value = "댓글 좋아요", notes = "replyNum값(tbl_reply)PK값만 넘겨주시면 됩니다. 한 번 누르면 좋아요 / 2번 클릭 시 좋아요 취소")
     @PostMapping("/replyHeartPlus")
     public ResponseEntity<Boolean> replyHeartPlus(@Valid @RequestBody HeartStateRequest heartStateRequest){
-        System.out.println("좋아요+");
-        return ResponseEntity.ok(heartService.heartPlus(heartStateRequest));
+        System.out.println("댓글 좋아요");
+        return ResponseEntity.ok(heartService.heartPlusReply(heartStateRequest));
     }
 
+
+    @ApiOperation(value="게시글 좋아요", notes = "boardNum값(tbl_board)PK값 넘겨주시면 됩니다. 한 번 누르면 좋아요 / 2번 클릭 시 좋아요 취소")
+    @PostMapping("/boardHeartPlus")
+    public ResponseEntity<Boolean> boardHeartPlus(@Valid @RequestBody HeartStateRequest heartStateRequest){
+        System.out.println("게시글 좋아요");
+        return ResponseEntity.ok(heartService.heartPlusBoard(heartStateRequest));
+    }
 }

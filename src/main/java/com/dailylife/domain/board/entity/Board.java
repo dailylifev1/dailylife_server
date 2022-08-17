@@ -2,6 +2,7 @@ package com.dailylife.domain.board.entity;
 
 import com.dailylife.domain.board.dto.BoardCreateRequest;
 import com.dailylife.domain.board.dto.BoardUpdateRequest;
+import com.dailylife.domain.heart.entity.Heart;
 import com.dailylife.domain.image.entity.Image;
 import com.dailylife.domain.reply.entity.Reply;
 import com.dailylife.domain.user.entity.User;
@@ -37,6 +38,10 @@ public class Board {
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<Image> images = new ArrayList<>();
+
+    @OneToMany(mappedBy = "board" ,cascade = CascadeType.ALL) // board이(가) 삭제되면 자동으로 heart또한 삭제
+    @JsonIgnore
+    private List<Heart> hearts = new ArrayList<>();
 
    /* @OneToMany(mappedBy = "board")
     @JsonIgnore

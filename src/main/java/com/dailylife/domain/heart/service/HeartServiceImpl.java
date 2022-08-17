@@ -1,5 +1,6 @@
 package com.dailylife.domain.heart.service;
 
+import com.dailylife.domain.board.entity.Board;
 import com.dailylife.domain.heart.dto.HeartStateRequest;
 import com.dailylife.domain.heart.entity.Heart;
 import com.dailylife.domain.heart.repository.HeartRepository;
@@ -26,21 +27,36 @@ public class HeartServiceImpl implements HeartService{
 
     @Override
     @Transactional
-    public boolean heartPlus(HeartStateRequest heartStateRequest) {
-
+    public boolean heartPlusReply(HeartStateRequest heartStateRequest) {
         Reply reply = new Reply();
-        reply.setReplyNum(heartStateRequest.getRno());
+        reply.setReplyNum(heartStateRequest.getReplyNum());
         User user = userRepository.findByUserId(jwtService.getLoginId());
-        heartStateRequest.setUno(user.getUserNum());
-        if(heartRepository.countByReplyReplyNumAndUno(reply.getReplyNum(), user.getUserNum()) == 0){
+        heartStateRequest.setUserNum(user.getUserNum());
+        if(heartRepository.countByReplyReplyNumAndUserNum(reply.getReplyNum(), user.getUserNum()) == 0){
             heartStateRequest.setHeartState(1L);
-            Heart heart = heartRepository.save(Heart.toEntity(heartStateRequest, reply));
+            Heart heart = heartRepository.save(Heart.toEntityReply(heartStateRequest, reply));
         }
         else {
-          heartRepository.deleteByReplyReplyNumAndUno(reply.getReplyNum(), user.getUserNum());
+          heartRepository.deleteByReplyReplyNumAndUserNum(reply.getReplyNum(), user.getUserNum());
         }
         return true;
 
+    }
+
+    @Override
+    @Transactional
+    public boolean heartPlusBoard(HeartStateRequest heartStateRequest) {
+        Board board = new Board();
+        board.setBoardNum(heartStateRequest.getBoardNum());
+        User user = userRepository.findByUserId(jwtService.getLoginId());
+        heartStateRequest.setUserNum(user.getUserNum());
+        if(heartRepository.countByBoardBoardNumAndUserNum(board.getBoardNum(),user.getUserNum())==0){
+            heartStateRequest.setHeartState(1L);
+            Heart heart = heartRepository.save(Heart.toEntityBoard(heartStateRequest, board));
+        }else {
+            heartRepository.deleteByBoardBoardNumAndUserNum(board.getBoardNum(), user.getUserNum());
+        }
+        return true;
     }
 
 }

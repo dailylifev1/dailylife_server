@@ -12,9 +12,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @ApiModel(description = "좋아요 상태 변경을 위한 객체")
 public class HeartStateRequest {
-    private Long rno;
-
-    private Long uno;
-
+    private Long replyNum;
+    private Long userNum;
+    private Long boardNum;
     private Long heartState;
 }

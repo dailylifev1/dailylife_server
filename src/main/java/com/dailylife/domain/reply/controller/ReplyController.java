@@ -34,13 +34,13 @@ public class ReplyController {
         return ResponseEntity.ok(replyService.insert(replyInsertRequest));
     }
 
-    @ApiOperation(value = "댓글 삭제", notes = "댓글 삭제 완료")
+    @ApiOperation(value = "댓글 삭제", notes = "작성한 댓글을 삭제하기 위해서 댓글 PK (replyNum)넘겨 주시면 됩니다.")
     @DeleteMapping("/delete/{replyNum}")
     public ResponseEntity<Boolean> deleteReply(@PathVariable("replyNum")Long replyNum, ReplyDeleteRequest replyDeleteRequest){
         return ResponseEntity.ok(replyService.delete(replyNum));
     }
 
-    @ApiOperation(value = "댓글 확인", notes = "게시물 댓글 확인")
+    @ApiOperation(value = "댓글 확인", notes = "게시물 댓글 확인을 위해서 게시물번호 PK (boardNum)넘겨 주시면 됩니다.")
     @GetMapping("/getReply/{boardNum}")
     public ResponseEntity<List<Reply>> getReply(@PathVariable("boardNum")Long boardNum){
         return ResponseEntity.ok(replyService.getReplyList(boardNum));
