@@ -16,19 +16,22 @@ public class SingleUpload {
 
     public String FileUpload(MultipartFile file) throws IOException {
 
-        String uploadPath = "/profileImg"; // 우선 절대경로 설정
+        String uploadPath = "/home/ubuntu/images"; // 우선 절대경로 설정
 
         File target = new File(uploadPath);
         if (!target.exists()) target.mkdirs(); // 파일 경로에 폴더 없으면 새로운 폴더 생성
 
+        String saveFileName = "default";
 
-        String orgFileName = file.getOriginalFilename();  //파일 실제이름
-        String orgFileExtension = orgFileName.substring(orgFileName.lastIndexOf(".")); // 파일 확장자 exe같은거
-        String saveFileName = UUID.randomUUID().toString().replaceAll("-", "") + orgFileExtension; // 파일 랜덤이름
-        Long saveFileSize = file.getSize();
+        if(file != null) {
+            String orgFileName = file.getOriginalFilename();  //파일 실제이름
+            String orgFileExtension = orgFileName.substring(orgFileName.lastIndexOf(".")); // 파일 확장자 exe같은거
+            saveFileName= UUID.randomUUID().toString().replaceAll("-", "") + orgFileExtension; // 파일 랜덤이름
+            Long saveFileSize = file.getSize();
+            target = new File(uploadPath, saveFileName);
+            file.transferTo(target);
+        }
 
-        target = new File(uploadPath, saveFileName);
-        file.transferTo(target);
 
         return saveFileName;
     }

@@ -5,6 +5,7 @@ import com.dailylife.domain.user.dto.UserLoginRequest;
 import com.dailylife.domain.user.dto.UserModifyRequest;
 import com.dailylife.domain.user.dto.UserPagination;
 import com.dailylife.domain.user.entity.User;
+import com.dailylife.domain.user.exception.AlreadyUserIdException;
 import com.dailylife.domain.user.exception.NotFoundUserException;
 import com.dailylife.domain.user.exception.UserException;
 import com.dailylife.domain.user.repository.UserPaginationRepository;
@@ -27,7 +28,6 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-
     private final UserPaginationRepository userPaginationRepository;
     private final SpringSecurityConfig springSecurity;
     private final SingleUpload singleUpload;
@@ -35,13 +35,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public User join(UserJoinRequest userJoinRequest) {
-        if(userRepository.countByUserId(userJoinRequest.getUserId()) !=0){
-            throw new RuntimeException("이미 존재하는 ID입니다");
-        }
+    public User join(UserJoinRequest userJoinRequest) throws IOException{
+        if(userRepository.countByUserId(userJoinRequest.getUserId()) !=0) throw new AlreadyUserIdException();
+
         String enPw = springSecurity.passwordEncoder().encode(userJoinRequest.getUserPassword()); // 스프링시큐리티로 pw 암호화
         userJoinRequest.setUserPassword(enPw);
-        User user = userRepository.save(User.toEntity(userJoinRequest));
+
+        User user = userRepository.save(User.toEntity(userJoinRequest , singleUpload.FileUpload(userJoinRequest.getUserProfileImg())));
+
         return user;
     }
 
@@ -103,6 +104,11 @@ public class UserServiceImpl implements UserService {
         if (user.isEmpty()) throw new NotFoundUserException();
         return user;
 
+    }
+
+    @Override
+    public Long getUserNum() {
+        return userRepository.findByUserId(jwtService.getLoginId()).getUserNum();
     }
 
 

@@ -12,5 +12,8 @@ public interface FileService {
 
     String saveImg(MultipartFile[] imgName) throws IOException;
 
+    String singleSaveImg(MultipartFile imaName) throws IOException;
+
+
 
 }

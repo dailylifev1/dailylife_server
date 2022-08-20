@@ -33,7 +33,7 @@ public class UserController {
 
     @ApiOperation(value = "회원가입", notes = "회원가입을 합니다.")
     @PostMapping("/join")
-    public ApplicationResponse<User> saveUser(@Valid @RequestBody UserJoinRequest userJoinRequest) {
+    public ApplicationResponse<User> saveUser(@Valid @ModelAttribute UserJoinRequest userJoinRequest) throws IOException {
         return ApplicationResponse.create("회원가입이 완료되었습니다." , 200 , userService.join(userJoinRequest));
     }
 
@@ -62,7 +62,11 @@ public class UserController {
         return ApplicationResponse.create("유저에 대한 정보입니다." , 250,  userService.findUser(userPagination));
     }
 
-
+    @ApiOperation(value = "userNum반환" , notes = "토큰값을 통해서 user를 찾아서 userNum을 반환")
+    @PostMapping("/getUserNum")
+    public ApplicationResponse<Long> getUserNum() {
+        return ApplicationResponse.create("userNum을 반환합니다." , 260 , userService.getUserNum());
+    }
 
 
     @PostMapping("/post")

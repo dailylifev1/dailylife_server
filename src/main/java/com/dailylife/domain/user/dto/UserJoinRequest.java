@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import org.apache.tomcat.jni.Local;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
@@ -40,7 +41,6 @@ public class UserJoinRequest {
 
     private LocalDateTime userJoinDate;
 
-    private String userProfileImg;
-
+    private MultipartFile userProfileImg;
 
 }

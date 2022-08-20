@@ -55,7 +55,7 @@ public class User {
 
 
 
-    public static User toEntity(UserJoinRequest userJoinRequest) {
+    public static User toEntity(UserJoinRequest userJoinRequest, String imaName) {
         return  User.builder()
                 .userId(userJoinRequest.getUserId())
                 .userPassword(userJoinRequest.getUserPassword())
@@ -63,6 +63,7 @@ public class User {
                 .userPhoneNumber(userJoinRequest.getUserPhoneNumber())
                 .userEmail(userJoinRequest.getUserEmail())
                 .userJoinDate(LocalDateTime.now())
+                .userProfileImg(imaName)
                 .build();
     }
 
