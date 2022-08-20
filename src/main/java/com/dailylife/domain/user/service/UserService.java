@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface UserService {
 
-    User join(UserJoinRequest userJoinRequest);
+    User join(UserJoinRequest userJoinRequest) throws IOException;
 
     User login(UserLoginRequest userLoginRequest);
 
@@ -26,5 +26,5 @@ public interface UserService {
 
     List<User> findUser(UserPagination userPagination);
 
-
+    Long getUserNum();
 }
