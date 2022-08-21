@@ -16,4 +16,5 @@ public class HeartStateRequest {
     private Long userNum;
     private Long boardNum;
     private Long heartState;
+/*    private Long replyReplyNum; //대댓글 번호*/
 }

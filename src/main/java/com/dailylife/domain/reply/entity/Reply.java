@@ -44,9 +44,11 @@ public class Reply {
     @JsonIgnore
     private List<Heart> hearts = new ArrayList<>();
 
-   @OneToMany(mappedBy = "reply" ) // reply이 삭제되면 자동으로 replyReply또한 삭제(대댓글 삭제)
+    @OneToMany(mappedBy = "reply" ) // reply이 삭제되면 자동으로 replyReply또한 삭제(대댓글 삭제)
     @JsonIgnore
     private List<ReplyReply> replyReplies = new ArrayList<>();
+
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="userNum")

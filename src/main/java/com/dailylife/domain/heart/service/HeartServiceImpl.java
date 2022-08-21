@@ -5,6 +5,7 @@ import com.dailylife.domain.heart.dto.HeartStateRequest;
 import com.dailylife.domain.heart.entity.Heart;
 import com.dailylife.domain.heart.repository.HeartRepository;
 import com.dailylife.domain.reply.entity.Reply;
+import com.dailylife.domain.replyReply.entity.ReplyReply;
 import com.dailylife.domain.user.entity.User;
 import com.dailylife.domain.user.repository.UserRepository;
 import com.dailylife.global.jwt.service.JwtService;
@@ -24,7 +25,7 @@ public class HeartServiceImpl implements HeartService{
     private final UserRepository userRepository;
     private final JwtService jwtService;
 
-
+    /*댓글 좋아요 */
     @Override
     @Transactional
     public boolean heartPlusReply(HeartStateRequest heartStateRequest) {
@@ -42,7 +43,7 @@ public class HeartServiceImpl implements HeartService{
         return true;
 
     }
-
+    /*게시글 좋아요*/
     @Override
     @Transactional
     public boolean heartPlusBoard(HeartStateRequest heartStateRequest) {
@@ -52,11 +53,51 @@ public class HeartServiceImpl implements HeartService{
         heartStateRequest.setUserNum(user.getUserNum());
         if(heartRepository.countByBoardBoardNumAndUserNum(board.getBoardNum(),user.getUserNum())==0){
             heartStateRequest.setHeartState(1L);
-            Heart heart = heartRepository.save(Heart.toEntityBoard(heartStateRequest, board));
+            Heart heart = heartRepository.save(Heart.toEntityBoard(heartStateRequest,board));
         }else {
             heartRepository.deleteByBoardBoardNumAndUserNum(board.getBoardNum(), user.getUserNum());
         }
         return true;
     }
+
+    /*대댓글 좋아요*//*
+    @Override
+    @Transactional
+    public boolean heartPlusReplyReply(HeartStateRequest heartStateRequest) {
+        ReplyReply replyReply = new ReplyReply();
+        replyReply.setReplyReplyNum(heartStateRequest.getReplyReplyNum());
+        User user = userRepository.findByUserId(jwtService.getLoginId());
+        heartStateRequest.setUserNum(user.getUserNum());
+        if(heartRepository.countByReplyReplyReplyReplyNumAndUserNum(replyReply.getReplyReplyNum(),user.getUserNum())==0){
+            heartStateRequest.setHeartState(1L);
+            Heart heart = heartRepository.save(Heart.toEntityReplyReply(heartStateRequest,replyReply));
+        }else{
+            heartRepository.deleteByReplyReplyReplyReplyNumAndUserNum(replyReply.getReplyReplyNum(),user.getUserNum());
+        }
+        return true;
+    }*/
+
+    /*댓글 좋아요 총 개수 출력*/
+    @Override
+    @Transactional
+    public Long heartCountReply(Long replyNum) {
+        Long heartCount = heartRepository.countByReplyReplyNum(replyNum);
+        return heartCount;
+    }
+    /*게시글 좋아요 총 개수 출력*/
+    @Override
+    @Transactional
+    public Long heartCountBoard(Long boardNum) {
+        Long heartCount = heartRepository.countByBoardBoardNum(boardNum);
+        return heartCount;
+    }
+/*
+    *//*대댓글 좋아요 총 개수 출력*//*
+    @Override
+    @Transactional
+    public Long heartCountReplyReply(Long replyReplyNum) {
+        Long heartCount = heartRepository.countByReplyReplyReplyReplyNum(replyReplyNum);
+        return heartCount;
+    }*/
 
 }

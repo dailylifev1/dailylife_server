@@ -43,6 +43,7 @@ public class ReplyController {
     @ApiOperation(value = "댓글 확인", notes = "게시물 댓글 확인을 위해서 게시물번호 PK (boardNum)넘겨 주시면 됩니다.")
     @GetMapping("/getReply/{boardNum}")
     public ResponseEntity<List<Reply>> getReply(@PathVariable("boardNum")Long boardNum){
+        System.out.println(replyService.getReplyList(boardNum));
         return ResponseEntity.ok(replyService.getReplyList(boardNum));
     }
 

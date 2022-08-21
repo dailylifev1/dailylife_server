@@ -47,6 +47,10 @@ public class ReplyReply {
     @JoinColumn(name="parentReplyNum") // 상위 댓글 replyNum
     private Reply reply;
 
+/*    @OneToMany(mappedBy = "replyReply")
+    @JsonIgnore
+    private List<Heart> hearts = new ArrayList<>();*/
+
     public static ReplyReply toEntityReplyReply(ReplyReplyInsertRequest replyInsertRequest){
         return ReplyReply.builder()
                 .replyReplyContext(replyInsertRequest.getReplyReplyContext())

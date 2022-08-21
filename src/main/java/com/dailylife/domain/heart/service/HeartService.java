@@ -14,6 +14,13 @@ public interface HeartService {
     /*게시글 좋아요 UP / 좋아요 취소*/
     boolean heartPlusBoard(HeartStateRequest heartStateRequest);
 
+/*    boolean heartPlusReplyReply(HeartStateRequest heartStateRequest);*/
+
+    Long heartCountReply(Long replyNum);
+
+    Long heartCountBoard(Long boardNum);
+
+/*    Long heartCountReplyReply(Long replyReplyNum);*/
 
 
 }
