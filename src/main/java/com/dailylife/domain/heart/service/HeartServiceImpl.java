@@ -100,4 +100,11 @@ public class HeartServiceImpl implements HeartService{
         return heartCount;
     }*/
 
+    @Override
+    @Transactional
+    public boolean getHeart(Long userNum, Long boardNum) {
+        if(heartRepository.findHeartStateByUserNumAndBoardBoardNum(userNum, boardNum).isEmpty()){
+            return false;
+        }else return true;
+    }
 }

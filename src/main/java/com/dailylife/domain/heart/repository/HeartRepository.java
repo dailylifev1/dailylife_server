@@ -25,6 +25,8 @@ public interface HeartRepository extends JpaRepository<Heart, Long> {
 
     Long countByBoardBoardNum(Long boardNum); // 게시글 좋아요 총 갯수 출력
 
+    Optional<Long> findHeartStateByUserNumAndBoardBoardNum(Long userNum, Long boardNum);
+
     /*Long countByReplyReplyReplyReplyNum(Long replyReplyNum); // 대댓글 좋아요 총 개수 출력*/
 
 }

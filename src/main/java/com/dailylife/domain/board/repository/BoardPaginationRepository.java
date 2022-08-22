@@ -13,7 +13,6 @@ import java.util.List;
 
 public interface BoardPaginationRepository extends JpaRepository<Board, Long> {
     public default List<Board> findAll(BoardPagination pagination) {
-        System.out.println(pagination.getKeyword());
         if(pagination.getKeyword()!=null){
             return findTitle(pagination);
         }

@@ -50,8 +50,9 @@ public class WebConfig implements WebMvcConfigurer {
                             "/api/users/login",
                             "/error",
                             "/boardImg/**",
-                            "/api/board/getBoard/**",
-                            "/api/board/getBoardCount");
+                            "/api/board/getBoardCount",
+                            "/api/heart/countHeartReply/**",
+                            "/api/heart/countHeartBoard/**");
 
 
     }

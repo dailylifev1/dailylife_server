@@ -4,8 +4,10 @@ import com.dailylife.domain.board.dto.*;
 import com.dailylife.domain.board.entity.Board;
 import com.dailylife.domain.board.repository.BoardPaginationRepository;
 import com.dailylife.domain.board.repository.BoardRepository;
+import com.dailylife.domain.heart.service.HeartService;
 import com.dailylife.domain.image.entity.Image;
 import com.dailylife.domain.image.repository.ImageRepository;
+import com.dailylife.domain.user.entity.User;
 import com.dailylife.domain.user.repository.UserRepository;
 import com.dailylife.global.fileUpload.ImageRemove;
 import com.dailylife.global.fileUpload.MultiUpload;
@@ -30,6 +32,7 @@ public class BoardServiceImpl implements BoardService{
     private final MultiUpload multiUpload;
     private final ImageRemove imageRemove;
     private final BoardPaginationRepository paginationRepository;
+    private final HeartService heartService;
 
     private static String ServerUrl = "http://146.56.39.196:8080/boardImg/";
 
@@ -46,7 +49,7 @@ public class BoardServiceImpl implements BoardService{
                 imageRepository.save(Image.toEntity(fileName, board));
             }
         }
-        return BoardCreateAndGetResponse.from(board , images ,ServerFileUrl);
+        return BoardCreateAndGetResponse.from(board , images ,ServerFileUrl,false);
     }
 
     @Override
@@ -77,8 +80,12 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public List<BoardCreateAndGetResponse> getPage(BoardPagination pagination) {
+        String loginId = jwtService.getLoginId();
+        User user = userRepository.findByUserId(loginId);
+        Long uno = user.getUserNum();
         List<BoardCreateAndGetResponse> BoardCreateAndGetResponseList = new ArrayList<>();
         for (Board board : paginationRepository.findAll(pagination)) {
+
             List<String> serverFileUrl = new ArrayList<>();
             List<String> imageNameList = new ArrayList<>();
             List<Image> byBoardBoardNum = imageRepository.findByBoardBoardNum(board.getBoardNum());
@@ -86,7 +93,7 @@ public class BoardServiceImpl implements BoardService{
                 imageNameList.add(image.getImageName());
                 serverFileUrl.add(ServerUrl+image.getImageName());
             }
-            BoardCreateAndGetResponseList.add(BoardCreateAndGetResponse.from(board , imageNameList , serverFileUrl));
+            BoardCreateAndGetResponseList.add(BoardCreateAndGetResponse.from(board , imageNameList , serverFileUrl,heartService.getHeart(uno, board.getBoardNum())));
         }
         return BoardCreateAndGetResponseList;
     }

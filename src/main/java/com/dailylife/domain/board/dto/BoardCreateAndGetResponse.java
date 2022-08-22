@@ -19,13 +19,15 @@ public class BoardCreateAndGetResponse {
     private String content;
     private List<String> originalFileName;
     private List<String> serverFileUrl;
+    private boolean heart;
 
-    public static BoardCreateAndGetResponse from(Board board , List<String> originalFileName , List<String> serverFileUrl) {
+    public static BoardCreateAndGetResponse from(Board board , List<String> originalFileName , List<String> serverFileUrl, boolean heart) {
         return BoardCreateAndGetResponse.builder()
                 .title(board.getTitle())
                 .content(board.getContent())
                 .originalFileName(originalFileName)
-                .serverFileUrl(serverFileUrl).build();
+                .serverFileUrl(serverFileUrl)
+                .heart(heart).build();
     }
 
 }
