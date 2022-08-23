@@ -16,10 +16,13 @@ public interface HeartRepository extends JpaRepository<Heart, Long> {
 
     int countByBoardBoardNumAndUserNum(Long boardNum, Long userNum); // 게시글 좋아요
     void deleteByBoardBoardNumAndUserNum(@Param(value="boardNum") Long boardNum, Long userNum); // 게시글 좋아요 취소
-    
-   /* int countByReplyReplyReplyReplyNumAndUserNum(Long replyReplyNum, Long userNum); // 대댓글 좋아요
-    
-    void deleteByReplyReplyReplyReplyNumAndUserNum(@Param(value="replyReplyNum") Long replyReplyNum, Long userNum); // 대댓글 좋아요 취소*/
+
+/*    @Query(value = "select count(*) tbl_heart where replyReplyNum = :replyReplyNum AND userNum=:userNum",nativeQuery = true)*/
+/*    int countByReplyReplyReplyReplyNumAndUserNum(Long replyReplyNum, Long userNum); // 대댓글 좋아요*/
+    int countByCommentReplyReplyNumAndUserNum(Long replyReplyNum, Long userNum);
+
+    void deleteByCommentReplyReplyNumAndUserNum(@Param(value="replyReplyNum") Long replyReplyNum, Long userNum); // 대댓글 좋아요 취소
+    /*void deleteByReplyReplyReplyReplyNumAndUserNum(@Param(value="replyReplyNum") Long replyReplyNum, Long userNum); // 대댓글 좋아요 취소*/
 
     Long countByReplyReplyNum(Long replyNum); // 댓글 좋아요 총 갯수 출력
 
@@ -27,6 +30,6 @@ public interface HeartRepository extends JpaRepository<Heart, Long> {
 
     Optional<Long> findHeartStateByUserNumAndBoardBoardNum(Long userNum, Long boardNum);
 
-    /*Long countByReplyReplyReplyReplyNum(Long replyReplyNum); // 대댓글 좋아요 총 개수 출력*/
+    Long countByCommentReplyReplyNum(Long replyReplyNum); // 대댓글 좋아요 총 개수 출력
 
 }

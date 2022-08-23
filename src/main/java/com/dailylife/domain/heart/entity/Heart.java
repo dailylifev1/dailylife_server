@@ -4,8 +4,7 @@ import com.dailylife.domain.board.entity.Board;
 import com.dailylife.domain.heart.dto.HeartStateRequest;
 import com.dailylife.domain.reply.entity.Reply;
 
-import com.dailylife.domain.replyReply.entity.ReplyReply;
-import com.dailylife.domain.user.entity.User;
+import com.dailylife.domain.replyReply.entity.Comment;
 import lombok.*;
 
 import javax.persistence.*;
@@ -31,9 +30,9 @@ public class Heart {
     @JoinColumn(name="boardNum")
     private Board board;
 
-/*    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="replyReplyNum")
-    private ReplyReply replyReply;*/
+    private Comment comment;
 
     private Long userNum;
 
@@ -60,14 +59,14 @@ public class Heart {
     }
 
     //대댓글 좋아요
-/*    public static Heart toEntityReplyReply(HeartStateRequest heartStateRequest, ReplyReply replyReply){
+    public static Heart toEntityReplyReply(HeartStateRequest heartStateRequest, Comment comment){
         Heart build = Heart.builder()
                 .heartState(heartStateRequest.getHeartState())
                 .userNum(heartStateRequest.getUserNum())
                 .build();
-        build.setReplyReply(replyReply);
+        build.setComment(comment);
         return build;
-    }*/
+    }
 
 
 

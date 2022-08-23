@@ -1,16 +1,16 @@
 package com.dailylife.domain.replyReply.service;
 
 import com.dailylife.domain.replyReply.dto.ReplyReplyInsertRequest;
-import com.dailylife.domain.replyReply.entity.ReplyReply;
+import com.dailylife.domain.replyReply.entity.Comment;
 
 import java.util.List;
 
 public interface ReplyReplyService {
 
-    ReplyReply insert(ReplyReplyInsertRequest replyReplyInsertRequest);
+    Comment insert(ReplyReplyInsertRequest replyReplyInsertRequest);
 
     boolean delete(Long replyReplyNum);
 
-    List<ReplyReply> getReplyReplyList(Long replyNum);
+    List<Comment> getReplyReplyList(Long replyNum);
 
 }
