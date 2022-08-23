@@ -2,7 +2,7 @@ package com.dailylife.domain.reply.entity;
 
 import com.dailylife.domain.heart.entity.Heart;
 import com.dailylife.domain.reply.dto.ReplyInsertRequest;
-import com.dailylife.domain.replyReply.entity.ReplyReply;
+import com.dailylife.domain.replyReply.entity.Comment;
 import com.dailylife.domain.user.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
@@ -46,7 +46,7 @@ public class Reply {
 
     @OneToMany(mappedBy = "reply" ) // reply이 삭제되면 자동으로 replyReply또한 삭제(대댓글 삭제)
     @JsonIgnore
-    private List<ReplyReply> replyReplies = new ArrayList<>();
+    private List<Comment> replyReplies = new ArrayList<>();
 
 
 

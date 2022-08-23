@@ -1,16 +1,12 @@
 package com.dailylife.domain.replyReply.entity;
 
-import com.dailylife.domain.heart.entity.Heart;
 import com.dailylife.domain.reply.entity.Reply;
 import com.dailylife.domain.replyReply.dto.ReplyReplyInsertRequest;
 import com.dailylife.domain.user.entity.User;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Entity(name = "tbl_replyReply")
@@ -19,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ReplyReply {
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +31,7 @@ public class ReplyReply {
 
 
 
-/*    @OneToMany(mappedBy = "replyReply" ) // replyReply이 삭제되면 자동으로 heart또한 삭제
+/*    @OneToMany(mappedBy = "comment" ) // replyReply이 삭제되면 자동으로 heart또한 삭제
     @JsonIgnore
     private List<Heart> hearts = new ArrayList<>();*/
 
@@ -47,12 +43,12 @@ public class ReplyReply {
     @JoinColumn(name="parentReplyNum") // 상위 댓글 replyNum
     private Reply reply;
 
-/*    @OneToMany(mappedBy = "replyReply")
+/*    @OneToMany(mappedBy = "comment")
     @JsonIgnore
     private List<Heart> hearts = new ArrayList<>();*/
 
-    public static ReplyReply toEntityReplyReply(ReplyReplyInsertRequest replyInsertRequest){
-        return ReplyReply.builder()
+    public static Comment toEntityReplyReply(ReplyReplyInsertRequest replyInsertRequest){
+        return Comment.builder()
                 .replyReplyContext(replyInsertRequest.getReplyReplyContext())
                 .replyNum(replyInsertRequest.getReplyNum())
                 .build();

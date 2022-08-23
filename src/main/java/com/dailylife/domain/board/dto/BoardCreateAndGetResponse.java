@@ -20,9 +20,11 @@ public class BoardCreateAndGetResponse {
     private List<String> originalFileName;
     private List<String> serverFileUrl;
     private boolean heart;
+    private Long boardNum;
 
     public static BoardCreateAndGetResponse from(Board board , List<String> originalFileName , List<String> serverFileUrl, boolean heart) {
         return BoardCreateAndGetResponse.builder()
+                .boardNum(board.getBoardNum())
                 .title(board.getTitle())
                 .content(board.getContent())
                 .originalFileName(originalFileName)

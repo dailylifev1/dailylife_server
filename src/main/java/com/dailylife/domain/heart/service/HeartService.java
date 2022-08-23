@@ -16,13 +16,13 @@ public interface HeartService {
 
     boolean getHeart(Long userNum, Long boardNum);
 
-/*    boolean heartPlusReplyReply(HeartStateRequest heartStateRequest);*/
+    boolean heartPlusReplyReply(HeartStateRequest heartStateRequest);
 
     Long heartCountReply(Long replyNum);
 
     Long heartCountBoard(Long boardNum);
 
-/*    Long heartCountReplyReply(Long replyReplyNum);*/
+    Long heartCountReplyReply(Long replyReplyNum);
 
 
 }

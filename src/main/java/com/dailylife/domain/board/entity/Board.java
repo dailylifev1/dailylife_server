@@ -45,7 +45,7 @@ public class Board {
 
    /* @OneToMany(mappedBy = "board")
     @JsonIgnore
-    private List<ReplyReply> replies = new ArrayList<>();*/
+    private List<Comment> replies = new ArrayList<>();*/
 
     public void setUser(User user) {
         this.user = user;

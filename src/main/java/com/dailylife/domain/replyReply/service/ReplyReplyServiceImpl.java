@@ -1,7 +1,7 @@
 package com.dailylife.domain.replyReply.service;
 
 import com.dailylife.domain.replyReply.dto.ReplyReplyInsertRequest;
-import com.dailylife.domain.replyReply.entity.ReplyReply;
+import com.dailylife.domain.replyReply.entity.Comment;
 import com.dailylife.domain.replyReply.repository.ReplyReplyRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,8 +20,8 @@ public class ReplyReplyServiceImpl implements ReplyReplyService {
 
     @Override
     @Transactional
-    public ReplyReply insert(ReplyReplyInsertRequest replyInsertRequest) {
-        ReplyReply reply = replyReplyRepository.save(ReplyReply.toEntityReplyReply(replyInsertRequest));
+    public Comment insert(ReplyReplyInsertRequest replyInsertRequest) {
+        Comment reply = replyReplyRepository.save(Comment.toEntityReplyReply(replyInsertRequest));
 
         return reply;
     }
@@ -35,11 +35,11 @@ public class ReplyReplyServiceImpl implements ReplyReplyService {
 
     @Override
     @Transactional
-    public List<ReplyReply> getReplyReplyList(Long replyNum) {
+    public List<Comment> getReplyReplyList(Long replyNum) {
 
-        List<ReplyReply> replyReply = replyReplyRepository.findByReplyNum(replyNum);
+        List<Comment> comment = replyReplyRepository.findByReplyNum(replyNum);
         System.out.println(replyReplyRepository.findByReplyNum(replyNum));
-        return replyReply;
+        return comment;
     }
 
 

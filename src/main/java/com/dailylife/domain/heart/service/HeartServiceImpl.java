@@ -5,7 +5,7 @@ import com.dailylife.domain.heart.dto.HeartStateRequest;
 import com.dailylife.domain.heart.entity.Heart;
 import com.dailylife.domain.heart.repository.HeartRepository;
 import com.dailylife.domain.reply.entity.Reply;
-import com.dailylife.domain.replyReply.entity.ReplyReply;
+import com.dailylife.domain.replyReply.entity.Comment;
 import com.dailylife.domain.user.entity.User;
 import com.dailylife.domain.user.repository.UserRepository;
 import com.dailylife.global.jwt.service.JwtService;
@@ -13,8 +13,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.io.IOException;
 
 @Slf4j
 @Service
@@ -60,22 +58,22 @@ public class HeartServiceImpl implements HeartService{
         return true;
     }
 
-    /*대댓글 좋아요*//*
+    /*대댓글 좋아요*/
     @Override
     @Transactional
     public boolean heartPlusReplyReply(HeartStateRequest heartStateRequest) {
-        ReplyReply replyReply = new ReplyReply();
-        replyReply.setReplyReplyNum(heartStateRequest.getReplyReplyNum());
+        Comment comment = new Comment();
+        comment.setReplyReplyNum(heartStateRequest.getReplyReplyNum());
         User user = userRepository.findByUserId(jwtService.getLoginId());
         heartStateRequest.setUserNum(user.getUserNum());
-        if(heartRepository.countByReplyReplyReplyReplyNumAndUserNum(replyReply.getReplyReplyNum(),user.getUserNum())==0){
+        if(heartRepository.countByCommentReplyReplyNumAndUserNum(comment.getReplyReplyNum(),user.getUserNum())==0){
             heartStateRequest.setHeartState(1L);
-            Heart heart = heartRepository.save(Heart.toEntityReplyReply(heartStateRequest,replyReply));
+            Heart heart = heartRepository.save(Heart.toEntityReplyReply(heartStateRequest, comment));
         }else{
-            heartRepository.deleteByReplyReplyReplyReplyNumAndUserNum(replyReply.getReplyReplyNum(),user.getUserNum());
+            heartRepository.deleteByCommentReplyReplyNumAndUserNum(comment.getReplyReplyNum(),user.getUserNum());
         }
         return true;
-    }*/
+    }
 
     /*댓글 좋아요 총 개수 출력*/
     @Override
@@ -91,14 +89,14 @@ public class HeartServiceImpl implements HeartService{
         Long heartCount = heartRepository.countByBoardBoardNum(boardNum);
         return heartCount;
     }
-/*
-    *//*대댓글 좋아요 총 개수 출력*//*
+
+    /*대댓글 좋아요 총 개수 출력*/
     @Override
     @Transactional
     public Long heartCountReplyReply(Long replyReplyNum) {
-        Long heartCount = heartRepository.countByReplyReplyReplyReplyNum(replyReplyNum);
+        Long heartCount = heartRepository.countByCommentReplyReplyNum(replyReplyNum);
         return heartCount;
-    }*/
+    }
 
     @Override
     @Transactional
