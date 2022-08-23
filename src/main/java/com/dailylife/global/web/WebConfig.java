@@ -52,7 +52,8 @@ public class WebConfig implements WebMvcConfigurer {
                             "/boardImg/**",
                             "/api/board/getBoardCount",
                             "/api/heart/countHeartReply/**",
-                            "/api/heart/countHeartBoard/**");
+                            "/api/heart/countHeartBoard/**"
+                    ,"/api/board/getBoard");
 
 
     }

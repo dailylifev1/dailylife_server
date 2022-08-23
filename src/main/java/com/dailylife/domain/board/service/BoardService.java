@@ -14,7 +14,7 @@ public interface BoardService {
 
     boolean delete(Long boardNum);
 
-    List<BoardCreateAndGetResponse> getPage(BoardPagination pagination);
+    List<BoardCreateAndGetResponse> getPage(BoardPagination pagination , String token);
 
     int getBoardCount();
 

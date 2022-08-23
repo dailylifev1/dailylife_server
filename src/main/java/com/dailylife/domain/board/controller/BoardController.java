@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
@@ -43,9 +44,8 @@ public class BoardController {
     }
     @ApiOperation(value = "페이징 게시글 가져오기", notes = "한 페이지 당 15개 게시글 가져옴, queryString 사용하여 pg(몇 페이지)는 필수로 넘겨주시고 query(검색어)는 있으면 채워서 보내주시면 됩니다(선택)")
     @GetMapping("/getBoard")
-    public ResponseEntity<List<BoardCreateAndGetResponse>> list(@RequestParam(value = "pg", defaultValue = "1") int pg,@RequestParam(value = "keyword",defaultValue = "") String keyword, BoardPagination pagination) {
-        System.out.println(pagination.getKeyword());
-        return ResponseEntity.ok(boardService.getPage(pagination));
+    public ResponseEntity<List<BoardCreateAndGetResponse>> list(@RequestParam(value = "pg", defaultValue = "1") int pg, @RequestParam(value = "keyword",defaultValue = "") String keyword, BoardPagination pagination , HttpServletRequest httpServletRequest) {
+        return ResponseEntity.ok(boardService.getPage(pagination , httpServletRequest.getHeader("X-ACCESS-TOKEN")));
     }
 
     @ApiOperation(value = "전체 게시글 수 가져오기", notes = "등록된 게시물 수 가져오기")

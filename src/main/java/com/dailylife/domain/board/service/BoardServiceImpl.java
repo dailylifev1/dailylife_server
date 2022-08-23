@@ -79,23 +79,40 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public List<BoardCreateAndGetResponse> getPage(BoardPagination pagination) {
-        String loginId = jwtService.getLoginId();
-        User user = userRepository.findByUserId(loginId);
-        Long uno = user.getUserNum();
-        List<BoardCreateAndGetResponse> BoardCreateAndGetResponseList = new ArrayList<>();
-        for (Board board : paginationRepository.findAll(pagination)) {
-
-            List<String> serverFileUrl = new ArrayList<>();
-            List<String> imageNameList = new ArrayList<>();
-            List<Image> byBoardBoardNum = imageRepository.findByBoardBoardNum(board.getBoardNum());
-            for (Image image : byBoardBoardNum) {
-                imageNameList.add(image.getImageName());
-                serverFileUrl.add(ServerUrl+image.getImageName());
+    public List<BoardCreateAndGetResponse> getPage(BoardPagination pagination , String token) {
+        List<BoardCreateAndGetResponse> BoardCreateAndGetResponseList;
+        if(token != null) {
+            String loginId = jwtService.getLoginId();
+            User user = userRepository.findByUserId(loginId);
+            Long uno = user.getUserNum();
+            BoardCreateAndGetResponseList = new ArrayList<>();
+            for (Board board : paginationRepository.findAll(pagination)) {
+                List<String> serverFileUrl = new ArrayList<>();
+                List<String> imageNameList = new ArrayList<>();
+                List<Image> byBoardBoardNum = imageRepository.findByBoardBoardNum(board.getBoardNum());
+                for (Image image : byBoardBoardNum) {
+                    imageNameList.add(image.getImageName());
+                    serverFileUrl.add(ServerUrl+image.getImageName());
+                }
+                BoardCreateAndGetResponseList.add(BoardCreateAndGetResponse.from(board , imageNameList , serverFileUrl,heartService.getHeart(uno, board.getBoardNum())));
             }
-            BoardCreateAndGetResponseList.add(BoardCreateAndGetResponse.from(board , imageNameList , serverFileUrl,heartService.getHeart(uno, board.getBoardNum())));
+            return BoardCreateAndGetResponseList;
         }
-        return BoardCreateAndGetResponseList;
+        else {
+            BoardCreateAndGetResponseList= new ArrayList<>();
+            for (Board board : paginationRepository.findAll(pagination)) {
+                List<String> serverFileUrl = new ArrayList<>();
+                List<String> imageNameList = new ArrayList<>();
+                List<Image> byBoardBoardNum = imageRepository.findByBoardBoardNum(board.getBoardNum());
+                for (Image image : byBoardBoardNum) {
+                    imageNameList.add(image.getImageName());
+                    serverFileUrl.add(ServerUrl+image.getImageName());
+                }
+                BoardCreateAndGetResponseList.add(BoardCreateAndGetResponse.from(board , imageNameList , serverFileUrl, false));
+            }
+            return BoardCreateAndGetResponseList;
+        }
+
     }
 
     @Override
