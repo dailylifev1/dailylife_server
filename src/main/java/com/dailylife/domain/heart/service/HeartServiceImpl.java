@@ -34,11 +34,12 @@ public class HeartServiceImpl implements HeartService{
         if(heartRepository.countByReplyReplyNumAndUserNum(reply.getReplyNum(), user.getUserNum()) == 0){
             heartStateRequest.setHeartState(1L);
             Heart heart = heartRepository.save(Heart.toEntityReply(heartStateRequest, reply));
+            return true;
         }
         else {
           heartRepository.deleteByReplyReplyNumAndUserNum(reply.getReplyNum(), user.getUserNum());
+            return false;
         }
-        return true;
 
     }
     /*게시글 좋아요*/
@@ -52,10 +53,11 @@ public class HeartServiceImpl implements HeartService{
         if(heartRepository.countByBoardBoardNumAndUserNum(board.getBoardNum(),user.getUserNum())==0){
             heartStateRequest.setHeartState(1L);
             Heart heart = heartRepository.save(Heart.toEntityBoard(heartStateRequest,board));
+            return true;
         }else {
             heartRepository.deleteByBoardBoardNumAndUserNum(board.getBoardNum(), user.getUserNum());
+            return false;
         }
-        return true;
     }
 
     /*대댓글 좋아요*/
@@ -69,10 +71,12 @@ public class HeartServiceImpl implements HeartService{
         if(heartRepository.countByCommentReplyReplyNumAndUserNum(comment.getReplyReplyNum(),user.getUserNum())==0){
             heartStateRequest.setHeartState(1L);
             Heart heart = heartRepository.save(Heart.toEntityReplyReply(heartStateRequest, comment));
+            return true;
         }else{
             heartRepository.deleteByCommentReplyReplyNumAndUserNum(comment.getReplyReplyNum(),user.getUserNum());
+            return false;
         }
-        return true;
+
     }
 
     /*댓글 좋아요 총 개수 출력*/

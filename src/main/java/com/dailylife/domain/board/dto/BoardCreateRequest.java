@@ -2,10 +2,7 @@ package com.dailylife.domain.board.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
@@ -15,6 +12,7 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel(description = "게시물 생성을 위한 요청 객체")
+@Builder
 public class BoardCreateRequest {
 
     @NotBlank(message = "게시물 제목을 입력해주세요")

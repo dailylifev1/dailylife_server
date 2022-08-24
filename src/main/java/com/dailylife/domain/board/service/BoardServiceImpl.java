@@ -79,41 +79,43 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public List<BoardCreateAndGetResponse> getPage(BoardPagination pagination , String token) {
+    public List<BoardCreateAndGetResponse> getPage(BoardPagination pagination) {
         List<BoardCreateAndGetResponse> BoardCreateAndGetResponseList;
-        if(token != null) {
-            String loginId = jwtService.getLoginId();
-            User user = userRepository.findByUserId(loginId);
-            Long uno = user.getUserNum();
-            BoardCreateAndGetResponseList = new ArrayList<>();
-            for (Board board : paginationRepository.findAll(pagination)) {
-                List<String> serverFileUrl = new ArrayList<>();
-                List<String> imageNameList = new ArrayList<>();
-                List<Image> byBoardBoardNum = imageRepository.findByBoardBoardNum(board.getBoardNum());
-                for (Image image : byBoardBoardNum) {
-                    imageNameList.add(image.getImageName());
-                    serverFileUrl.add(ServerUrl+image.getImageName());
-                }
-                BoardCreateAndGetResponseList.add(BoardCreateAndGetResponse.from(board , imageNameList , serverFileUrl,heartService.getHeart(uno, board.getBoardNum())));
+        String loginId = jwtService.getLoginId();
+        User user = userRepository.findByUserId(loginId);
+        Long uno = user.getUserNum();
+        BoardCreateAndGetResponseList = new ArrayList<>();
+        for (Board board : paginationRepository.findAll(pagination)) {
+            List<String> serverFileUrl = new ArrayList<>();
+            List<String> imageNameList = new ArrayList<>();
+            List<Image> byBoardBoardNum = imageRepository.findByBoardBoardNum(board.getBoardNum());
+            for (Image image : byBoardBoardNum) {
+                imageNameList.add(image.getImageName());
+                serverFileUrl.add(ServerUrl+image.getImageName());
             }
-            return BoardCreateAndGetResponseList;
+            BoardCreateAndGetResponseList.add(BoardCreateAndGetResponse.from(board , imageNameList , serverFileUrl,heartService.getHeart(uno, board.getBoardNum())));
         }
-        else {
-            BoardCreateAndGetResponseList= new ArrayList<>();
-            for (Board board : paginationRepository.findAll(pagination)) {
-                List<String> serverFileUrl = new ArrayList<>();
-                List<String> imageNameList = new ArrayList<>();
-                List<Image> byBoardBoardNum = imageRepository.findByBoardBoardNum(board.getBoardNum());
-                for (Image image : byBoardBoardNum) {
-                    imageNameList.add(image.getImageName());
-                    serverFileUrl.add(ServerUrl+image.getImageName());
-                }
-                BoardCreateAndGetResponseList.add(BoardCreateAndGetResponse.from(board , imageNameList , serverFileUrl, false));
+        return BoardCreateAndGetResponseList;
+    }
+
+    @Override
+    public List<BoardCreateAndGetResponse> getPageNotLogin(BoardPagination pagination) {
+        List<BoardCreateAndGetResponse> BoardCreateAndGetResponseList;
+        BoardCreateAndGetResponseList = new ArrayList<>();
+        for (Board board : paginationRepository.findAll(pagination)) {
+            List<String> serverFileUrl = new ArrayList<>();
+            List<String> imageNameList = new ArrayList<>();
+            List<Image> byBoardBoardNum = imageRepository.findByBoardBoardNum(board.getBoardNum());
+            for (Image image : byBoardBoardNum) {
+                imageNameList.add(image.getImageName());
+                serverFileUrl.add(ServerUrl+image.getImageName());
             }
-            return BoardCreateAndGetResponseList;
+            BoardCreateAndGetResponseList.add(BoardCreateAndGetResponse.from(board , imageNameList , serverFileUrl,false));
         }
+        return BoardCreateAndGetResponseList;
 
     }
+
 
     @Override
     public int getBoardCount() {
@@ -124,4 +126,6 @@ public class BoardServiceImpl implements BoardService{
     public List<Board> TitleList(BoardPagination pagination) {
         return paginationRepository.findTitle(pagination);
     }
+
+
 }

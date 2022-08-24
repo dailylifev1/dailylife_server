@@ -53,7 +53,7 @@ public class WebConfig implements WebMvcConfigurer {
                             "/api/board/getBoardCount",
                             "/api/heart/countHeartReply/**",
                             "/api/heart/countHeartBoard/**"
-                    ,"/api/board/getBoard");
+                    ,"/api/board/getBoardNotLogin");
 
 
     }

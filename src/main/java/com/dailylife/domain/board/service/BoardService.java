@@ -14,10 +14,11 @@ public interface BoardService {
 
     boolean delete(Long boardNum);
 
-    List<BoardCreateAndGetResponse> getPage(BoardPagination pagination , String token);
+    List<BoardCreateAndGetResponse> getPage(BoardPagination pagination);
 
     int getBoardCount();
 
     List<Board> TitleList(BoardPagination pagination);
 
+    List<BoardCreateAndGetResponse> getPageNotLogin(BoardPagination pagination);
 }
