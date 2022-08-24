@@ -31,7 +31,6 @@ public class FileServiceImpl implements FileService {
     @Override
     public String saveImg(MultipartFile[] imgName) throws IOException{
         List<String> images = multiUpload.FileUpload(imgName);
-        System.out.println(images);
         return null;
     }
 

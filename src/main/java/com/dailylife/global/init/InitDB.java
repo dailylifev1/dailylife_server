@@ -1,5 +1,7 @@
 package com.dailylife.global.init;
 
+import com.dailylife.domain.board.dto.BoardCreateRequest;
+import com.dailylife.domain.board.service.BoardService;
 import com.dailylife.domain.user.dto.UserJoinRequest;
 import com.dailylife.domain.user.entity.User;
 import com.dailylife.domain.user.repository.UserRepository;
@@ -23,6 +25,8 @@ public class InitDB {
 
     private final UserService userService;
 
+    private final BoardService boardService;
+
     @PostConstruct
     public void initDB() throws IOException {
         if(ddlAutoConfig.equals("create")){
@@ -44,6 +48,7 @@ public class InitDB {
                     .userPassword("dl")
                     .userName("dailyLife3")
                     .userEmail("dailyLife.dev@gmail.com").userJoinDate(LocalDateTime.now()).build();
+
 
             userService.join(userReq1);
             userService.join(userReq2);

@@ -43,7 +43,6 @@ public class JwtServiceImpl implements JwtService {
     @Override
     public String getLoginId() {
         String accessToken = resolveAccessToken();
-        log.info("accessToken = {}" , accessToken);
         if (accessToken == null || accessToken.length() == 0)
             throw new RuntimeException("토큰x");
 
