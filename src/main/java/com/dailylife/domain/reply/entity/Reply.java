@@ -30,8 +30,6 @@ public class Reply {
 
     private LocalDateTime replyTime;
 
-    private String replyState;
-
     private Long boardNum;
 
 
@@ -50,14 +48,17 @@ public class Reply {
 
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="userNum")
     private User user;
 
-    public static Reply toEntityReply(ReplyInsertRequest replyInsertRequest){
-        return Reply.builder()
+    public static Reply toEntityReply(ReplyInsertRequest replyInsertRequest, User user){
+        Reply build = Reply.builder()
                 .replyContext(replyInsertRequest.getReplyContext())
                 .boardNum(replyInsertRequest.getBoardNum())
+                .replyTime(LocalDateTime.now())
                 .build();
+        build.setUser(user);
+        return build;
     }
 }

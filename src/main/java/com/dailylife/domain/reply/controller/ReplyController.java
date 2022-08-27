@@ -6,6 +6,7 @@ import com.dailylife.domain.board.entity.Board;
 import com.dailylife.domain.board.service.BoardService;
 import com.dailylife.domain.reply.dto.ReplyDeleteRequest;
 import com.dailylife.domain.reply.dto.ReplyGetRequest;
+import com.dailylife.domain.reply.dto.ReplyGetResponse;
 import com.dailylife.domain.reply.dto.ReplyInsertRequest;
 import com.dailylife.domain.reply.entity.Reply;
 import com.dailylife.domain.reply.service.ReplyService;
@@ -42,8 +43,7 @@ public class ReplyController {
 
     @ApiOperation(value = "댓글 확인", notes = "게시물 댓글 확인을 위해서 게시물번호 PK (boardNum)넘겨 주시면 됩니다.")
     @GetMapping("/getReply/{boardNum}")
-    public ResponseEntity<List<Reply>> getReply(@PathVariable("boardNum")Long boardNum){
-        System.out.println(replyService.getReplyList(boardNum));
+    public ResponseEntity<List<ReplyGetResponse>> getReply(@PathVariable("boardNum")Long boardNum){
         return ResponseEntity.ok(replyService.getReplyList(boardNum));
     }
 
