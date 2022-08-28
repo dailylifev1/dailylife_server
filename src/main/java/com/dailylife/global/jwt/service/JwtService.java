@@ -6,4 +6,6 @@ public interface JwtService {
     String resolveAccessToken(); //검증
     String getLoginId();
 
+    String update(String userLoginId);
+
 }
