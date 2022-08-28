@@ -1,5 +1,8 @@
 package com.dailylife.global.jwt.service;
 
+import com.dailylife.domain.user.entity.User;
+import com.dailylife.domain.user.repository.UserRepository;
+import com.dailylife.domain.user.service.UserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -20,7 +23,9 @@ import java.util.Date;
 @Slf4j
 public class JwtServiceImpl implements JwtService {
 
-    private final Long ACCESS_TOKEN_VALID_TIME = 60 * 60 * 2 * 1000L;
+    private final UserRepository userRepository;
+
+    private final Long ACCESS_TOKEN_VALID_TIME = 60 * 60 * 2 * 10 * 1000L;
 
     @Override
     public String createAccessJwt(String UserId) {
@@ -59,5 +64,10 @@ public class JwtServiceImpl implements JwtService {
         return claims.getBody().get("loginId",String.class);
     }
 
+    @Override
+    public String update(String userLoginId) {
+        User user = userRepository.findByUserId(userLoginId);
+        return createAccessJwt(user.getUserId());
+    }
 
 }
