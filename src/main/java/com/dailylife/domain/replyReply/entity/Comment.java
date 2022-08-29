@@ -35,11 +35,11 @@ public class Comment {
     @JsonIgnore
     private List<Heart> hearts = new ArrayList<>();*/
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="userNum")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY) // reply이 삭제되면 자동으로 replyReply또한 삭제
+    @ManyToOne(fetch = FetchType.EAGER) // reply이 삭제되면 자동으로 replyReply또한 삭제
     @JoinColumn(name="parentReplyNum") // 상위 댓글 replyNum
     private Reply reply;
 
@@ -47,10 +47,14 @@ public class Comment {
     @JsonIgnore
     private List<Heart> hearts = new ArrayList<>();*/
 
-    public static Comment toEntityReplyReply(ReplyReplyInsertRequest replyInsertRequest){
-        return Comment.builder()
+    public static Comment toEntityReplyReply(ReplyReplyInsertRequest replyInsertRequest, User user, Reply reply){
+        Comment build = Comment.builder()
                 .replyReplyContext(replyInsertRequest.getReplyReplyContext())
                 .replyNum(replyInsertRequest.getReplyNum())
+                .replyReplyTime(LocalDateTime.now())
                 .build();
+        build.setUser(user);
+        build.setReply(reply);
+        return build;
     }
 }

@@ -1,5 +1,6 @@
 package com.dailylife.domain.replyReply.service;
 
+import com.dailylife.domain.replyReply.dto.ReplyReplyGetResponse;
 import com.dailylife.domain.replyReply.dto.ReplyReplyInsertRequest;
 import com.dailylife.domain.replyReply.entity.Comment;
 
@@ -11,6 +12,6 @@ public interface ReplyReplyService {
 
     boolean delete(Long replyReplyNum);
 
-    List<Comment> getReplyReplyList(Long replyNum);
+    List<ReplyReplyGetResponse> getReplyReplyList(Long replyNum);
 
 }
