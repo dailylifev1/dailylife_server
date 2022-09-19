@@ -25,8 +25,6 @@ public class Comment {
 
     private LocalDateTime replyReplyTime;
 
-    private String replyReplyState;
-
    private Long replyNum;
 
 

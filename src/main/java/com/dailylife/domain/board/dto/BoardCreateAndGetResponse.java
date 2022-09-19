@@ -2,6 +2,7 @@ package com.dailylife.domain.board.dto;
 
 
 import com.dailylife.domain.board.entity.Board;
+import com.dailylife.domain.user.entity.User;
 import io.swagger.annotations.ApiModel;
 import lombok.*;
 
@@ -21,15 +22,19 @@ public class BoardCreateAndGetResponse {
     private List<String> serverFileUrl;
     private boolean heart;
     private Long boardNum;
+    private String userName;
 
     public static BoardCreateAndGetResponse from(Board board , List<String> originalFileName , List<String> serverFileUrl, boolean heart) {
         return BoardCreateAndGetResponse.builder()
                 .boardNum(board.getBoardNum())
+                .userName(board.getUserName())
                 .title(board.getTitle())
                 .content(board.getContent())
                 .originalFileName(originalFileName)
                 .serverFileUrl(serverFileUrl)
-                .heart(heart).build();
+                .heart(heart)
+                .build();
+
     }
 
 }
