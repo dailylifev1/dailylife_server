@@ -30,6 +30,7 @@ public class Board {
     private String thumbNail;
     private Long likeCount;
     private Long fileId;
+    private String userName;
 
     @ManyToOne
     @JoinColumn(name = "uno")

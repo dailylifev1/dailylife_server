@@ -15,7 +15,7 @@ spring:
 
     properties:
       hibernate:
-        show_sql: false
+        show_sql: true
         format_sql: true
     database-platform: org.hibernate.dialect.MySQL5Dialect
     defer-datasource-initialization: true
@@ -36,3 +36,5 @@ spring:
 custom:
   path:
     upload-images: '/home/ubuntu/images'
+
+
