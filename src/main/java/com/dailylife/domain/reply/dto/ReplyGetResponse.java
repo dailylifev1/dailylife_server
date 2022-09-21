@@ -29,6 +29,7 @@ public class ReplyGetResponse {
 
     private String userName;
 
+
     public static ReplyGetResponse from(Reply reply, User user) {
         return ReplyGetResponse.builder()
                 .replyNum(reply.getReplyNum())

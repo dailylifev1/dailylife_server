@@ -21,4 +21,6 @@ public interface BoardService {
     List<Board> TitleList(BoardPagination pagination);
 
     List<BoardCreateAndGetResponse> getPageNotLogin(BoardPagination pagination);
+
+    List<BoardCreateAndGetResponse> getMyBoard(BoardPagination pagination);
 }

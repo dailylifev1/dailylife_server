@@ -26,11 +26,6 @@ public class UserModifyRequest {
     @ApiModelProperty(notes = "이름을 입력해주세요")
     private String userName;
 
-    @NotBlank(message = "핸드폰 번호를 입력해주세요")
-    @ApiModelProperty(notes = "핸드폰 번호를 입력해주세요")
-    private String userPhoneNumber;
-
-
     private String userProfileImg;
 
 

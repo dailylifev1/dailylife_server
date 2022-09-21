@@ -5,6 +5,10 @@ spring:
     username: dailylife
     password: 1234
 
+#    url: jdbc:mysql://localhost:3306/jpashop?useUnicode=yes&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Seoul
+  #    username: sa
+  #    password: km971gb5!!
+
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher

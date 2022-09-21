@@ -2,6 +2,7 @@ package com.dailylife.domain.board.repository;
 
 import com.dailylife.domain.board.dto.BoardPagination;
 import com.dailylife.domain.board.entity.Board;
+import com.dailylife.domain.user.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -22,7 +23,17 @@ public interface BoardPaginationRepository extends JpaRepository<Board, Long> {
         return page.getContent();
     }
 
+    public default List<Board> findAllMyBoard(BoardPagination pagination , User user) {
+        Page<Board> page = this.findByUser(user , PageRequest.of(pagination.getPg() - 1, pagination.getSz(),
+                Sort.Direction.DESC, "boardNum"));
+        pagination.setRecordCount((int)page.getTotalElements());
+        return page.getContent();
+    }
+
+
     Page<Board> findByTitleContaining(String keyword, Pageable pageable);
+
+    Page<Board> findByUser(User user, Pageable pageable);
 
     public default List<Board> findTitle(BoardPagination pagination) {
         Page<Board> page = this.findByTitleContaining(pagination.getKeyword(),PageRequest.of(pagination.getPg() - 1, pagination.getSz(),
