@@ -67,7 +67,6 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByUserId(jwtService.getLoginId());
         user.setUserPassword(springSecurity.passwordEncoder().encode(userModifyRequest.getUserPassword())); // 암호는 시큐리티로 암호화 후 저장
         user.setUserName(userModifyRequest.getUserName());
-        user.setUserPhoneNumber(userModifyRequest.getUserPhoneNumber());
         user.setUserProfileImg(userModifyRequest.getUserProfileImg());
         return user;
     }

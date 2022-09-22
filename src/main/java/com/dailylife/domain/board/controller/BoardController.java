@@ -61,4 +61,13 @@ public class BoardController {
         return ResponseEntity.ok(boardService.getBoardCount());
     }
 
+    @ApiOperation(value = "마이페이지 게시물 가져오기", notes = "위의 게시글 불러오는 조건과 동일한 조건입니다.")
+    @GetMapping("/myBoard")
+    public ResponseEntity<List<BoardCreateAndGetResponse>> myBoard(BoardPagination pagination) {
+        return ResponseEntity.ok(boardService.getMyBoard(pagination));
+    }
+
+
+
+
 }

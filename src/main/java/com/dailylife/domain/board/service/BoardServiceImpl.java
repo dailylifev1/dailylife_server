@@ -116,6 +116,26 @@ public class BoardServiceImpl implements BoardService{
 
     }
 
+    @Override
+    public List<BoardCreateAndGetResponse> getMyBoard(BoardPagination pagination) {
+        List<BoardCreateAndGetResponse> BoardCreateAndGetResponseList;
+        BoardCreateAndGetResponseList = new ArrayList<>();
+        User user = userRepository.findByUserId(jwtService.getLoginId());
+        Long uno = user.getUserNum();
+                for (Board board : paginationRepository.findAllMyBoard(pagination , user)) {
+                    List<String> serverFileUrl = new ArrayList<>();
+                    List<String> imageNameList = new ArrayList<>();
+                    List<Image> byBoardBoardNum = imageRepository.findByBoardBoardNum(board.getBoardNum());
+                    for (Image image : byBoardBoardNum) {
+                        imageNameList.add(image.getImageName());
+                        serverFileUrl.add(ServerUrl+image.getImageName());
+            }
+            BoardCreateAndGetResponseList.add(BoardCreateAndGetResponse.from(board , imageNameList , serverFileUrl,heartService.getHeart(uno, board.getBoardNum())));
+        }
+        return BoardCreateAndGetResponseList;
+
+    }
+
 
     @Override
     public int getBoardCount() {
