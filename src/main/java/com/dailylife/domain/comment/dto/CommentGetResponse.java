@@ -1,8 +1,7 @@
-package com.dailylife.domain.reply.dto;
+package com.dailylife.domain.comment.dto;
 
 
 import com.dailylife.domain.comment.entity.Comment;
-import com.dailylife.domain.reply.entity.Reply;
 import com.dailylife.domain.user.entity.User;
 import io.swagger.annotations.ApiModel;
 import lombok.*;
@@ -15,25 +14,26 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @ApiModel(description = "게시물 작성시 응답 객체 ")
 @Builder
-public class ReplyGetResponse {
-    private Long replyNum;
+public class CommentGetResponse {
+    private Long commentNum;
 
-    private Long commentNum; // 댓글 번호
+    private String commentContext;
 
-    private String replyContext;
+    private LocalDateTime commentTime;
 
-    private LocalDateTime replyTime;
+    private Long boardNum;
 
     private Long userNum;
 
     private String userName;
 
-    public static ReplyGetResponse from(Reply reply, User user, Comment comment) {
-        return ReplyGetResponse.builder()
-                .replyNum(reply.getReplyNum())
-                .replyContext(reply.getReplyContext())
-                .replyTime(reply.getReplyTime())
+
+    public static CommentGetResponse from(Comment comment, User user) {
+        return CommentGetResponse.builder()
                 .commentNum(comment.getCommentNum())
+                .commentContext(comment.getCommentContext())
+                .commentTime(comment.getCommentTime())
+                .boardNum(comment.getBoardNum())
                 .userNum(user.getUserNum())
                 .userName(user.getUserName()).build();
     }

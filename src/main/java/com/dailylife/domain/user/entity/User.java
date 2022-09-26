@@ -1,7 +1,7 @@
 package com.dailylife.domain.user.entity;
 
 import com.dailylife.domain.board.entity.Board;
-import com.dailylife.domain.reply.entity.Reply;
+import com.dailylife.domain.comment.entity.Comment;
 import com.dailylife.domain.user.dto.UserJoinRequest;
 import com.dailylife.domain.follow.entity.Follow;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -50,7 +50,7 @@ public class User {
 
     @OneToMany(mappedBy = "user" , orphanRemoval = true, cascade = CascadeType.PERSIST)
     @JsonIgnore
-    private List<Reply> replies = new ArrayList<>();
+    private List<Comment> replies = new ArrayList<>();
 
 
 

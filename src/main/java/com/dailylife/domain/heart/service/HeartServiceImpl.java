@@ -4,8 +4,8 @@ import com.dailylife.domain.board.entity.Board;
 import com.dailylife.domain.heart.dto.HeartStateRequest;
 import com.dailylife.domain.heart.entity.Heart;
 import com.dailylife.domain.heart.repository.HeartRepository;
+import com.dailylife.domain.comment.entity.Comment;
 import com.dailylife.domain.reply.entity.Reply;
-import com.dailylife.domain.replyReply.entity.Comment;
 import com.dailylife.domain.user.entity.User;
 import com.dailylife.domain.user.repository.UserRepository;
 import com.dailylife.global.jwt.service.JwtService;
@@ -26,18 +26,18 @@ public class HeartServiceImpl implements HeartService{
     /*댓글 좋아요 */
     @Override
     @Transactional
-    public boolean heartPlusReply(HeartStateRequest heartStateRequest) {
-        Reply reply = new Reply();
-        reply.setReplyNum(heartStateRequest.getReplyNum());
+    public boolean heartPlusComment(HeartStateRequest heartStateRequest) {
+        Comment comment = new Comment();
+        comment.setCommentNum(heartStateRequest.getCommentNum());
         User user = userRepository.findByUserId(jwtService.getLoginId());
         heartStateRequest.setUserNum(user.getUserNum());
-        if(heartRepository.countByReplyReplyNumAndUserNum(reply.getReplyNum(), user.getUserNum()) == 0){
+        if(heartRepository.countByCommentCommentNumAndUserNum(comment.getCommentNum(), user.getUserNum()) == 0){
             heartStateRequest.setHeartState(1L);
-            Heart heart = heartRepository.save(Heart.toEntityReply(heartStateRequest, reply));
+            Heart heart = heartRepository.save(Heart.toEntityComment(heartStateRequest, comment));
             return true;
         }
         else {
-          heartRepository.deleteByReplyReplyNumAndUserNum(reply.getReplyNum(), user.getUserNum());
+          heartRepository.deleteByCommentCommentNumAndUserNum(comment.getCommentNum(), user.getUserNum());
             return false;
         }
 
@@ -63,17 +63,17 @@ public class HeartServiceImpl implements HeartService{
     /*대댓글 좋아요*/
     @Override
     @Transactional
-    public boolean heartPlusReplyReply(HeartStateRequest heartStateRequest) {
-        Comment comment = new Comment();
-        comment.setReplyReplyNum(heartStateRequest.getReplyReplyNum());
+    public boolean heartPlusReply(HeartStateRequest heartStateRequest) {
+        Reply reply = new Reply();
+        reply.setReplyNum(heartStateRequest.getReplyNum());
         User user = userRepository.findByUserId(jwtService.getLoginId());
         heartStateRequest.setUserNum(user.getUserNum());
-        if(heartRepository.countByCommentReplyReplyNumAndUserNum(comment.getReplyReplyNum(),user.getUserNum())==0){
+        if(heartRepository.countByReplyReplyNumAndUserNum(reply.getReplyNum(),user.getUserNum())==0){
             heartStateRequest.setHeartState(1L);
-            Heart heart = heartRepository.save(Heart.toEntityReplyReply(heartStateRequest, comment));
+            Heart heart = heartRepository.save(Heart.toEntityReply(heartStateRequest, reply));
             return true;
         }else{
-            heartRepository.deleteByCommentReplyReplyNumAndUserNum(comment.getReplyReplyNum(),user.getUserNum());
+            heartRepository.deleteByReplyReplyNumAndUserNum(reply.getReplyNum(),user.getUserNum());
             return false;
         }
 
@@ -82,8 +82,8 @@ public class HeartServiceImpl implements HeartService{
     /*댓글 좋아요 총 개수 출력*/
     @Override
     @Transactional
-    public Long heartCountReply(Long replyNum) {
-        Long heartCount = heartRepository.countByReplyReplyNum(replyNum);
+    public Long heartCountComment(Long commentNum) {
+        Long heartCount = heartRepository.countByCommentCommentNum(commentNum);
         return heartCount;
     }
     /*게시글 좋아요 총 개수 출력*/
@@ -97,8 +97,8 @@ public class HeartServiceImpl implements HeartService{
     /*대댓글 좋아요 총 개수 출력*/
     @Override
     @Transactional
-    public Long heartCountReplyReply(Long replyReplyNum) {
-        Long heartCount = heartRepository.countByCommentReplyReplyNum(replyReplyNum);
+    public Long heartCountReply(Long replyNum) {
+        Long heartCount = heartRepository.countByReplyReplyNum(replyNum);
         return heartCount;
     }
 

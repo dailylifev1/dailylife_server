@@ -2,9 +2,9 @@ package com.dailylife.domain.heart.entity;
 
 import com.dailylife.domain.board.entity.Board;
 import com.dailylife.domain.heart.dto.HeartStateRequest;
-import com.dailylife.domain.reply.entity.Reply;
+import com.dailylife.domain.comment.entity.Comment;
 
-import com.dailylife.domain.replyReply.entity.Comment;
+import com.dailylife.domain.reply.entity.Reply;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,28 +23,28 @@ public class Heart {
     private Long heartNum;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="replyNum")
-    private Reply reply;
+    @JoinColumn(name="commentNum")
+    private Comment comment;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="boardNum")
     private Board board;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="replyReplyNum")
-    private Comment comment;
+    @JoinColumn(name="replyNum")
+    private Reply reply;
 
     private Long userNum;
 
     private Long heartState;
 
     //댓글 좋아요
-    public static Heart toEntityReply(HeartStateRequest heartStateRequest, Reply reply){
+    public static Heart toEntityComment(HeartStateRequest heartStateRequest, Comment comment){
         Heart build =  Heart.builder()
                 .heartState(heartStateRequest.getHeartState())
                 .userNum(heartStateRequest.getUserNum())
                 .build();
-        build.setReply(reply);
+        build.setComment(comment);
         return build;
     }
 
@@ -59,12 +59,12 @@ public class Heart {
     }
 
     //대댓글 좋아요
-    public static Heart toEntityReplyReply(HeartStateRequest heartStateRequest, Comment comment){
+    public static Heart toEntityReply(HeartStateRequest heartStateRequest, Reply reply){
         Heart build = Heart.builder()
                 .heartState(heartStateRequest.getHeartState())
                 .userNum(heartStateRequest.getUserNum())
                 .build();
-        build.setComment(comment);
+        build.setReply(reply);
         return build;
     }
 
