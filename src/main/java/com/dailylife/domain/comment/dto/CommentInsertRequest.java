@@ -1,4 +1,4 @@
-package com.dailylife.domain.reply.dto;
+package com.dailylife.domain.comment.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -11,13 +11,15 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(description = "대댓글을 작성을 위한 객체")
-public class ReplyInsertRequest {
+@ApiModel(description = "댓글을 작성을 위한 객체")
+public class CommentInsertRequest {
 
-    @NotBlank(message = "대댓글 내용을 입력해주세요.")
-    @ApiModelProperty(notes = "대댓글 내용을 입력해주세요.")
+    @NotBlank(message = "댓글 내용을 입력해주세요.")
+    @ApiModelProperty(notes = "댓글 내용을 입력해주세요.")
     private String replyContext;
 
-    private Long commentNum;
+    private Long boardNum;
+
+
 
 }

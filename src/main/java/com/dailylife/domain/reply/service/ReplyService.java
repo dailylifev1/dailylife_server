@@ -5,7 +5,6 @@ import com.dailylife.domain.reply.dto.ReplyInsertRequest;
 import com.dailylife.domain.reply.entity.Reply;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ReplyService {
 
@@ -13,6 +12,6 @@ public interface ReplyService {
 
     boolean delete(Long replyNum);
 
-    List<ReplyGetResponse> getReplyList(Long boardNum);
+    List<ReplyGetResponse> getReplyList(Long commentNum);
 
 }
