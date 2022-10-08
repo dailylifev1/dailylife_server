@@ -39,10 +39,12 @@ spring:
 
     properties:
       mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
+
+
+      smtp:
+        auth: true
+        starttls:
+          enable: true
 
 custom:
   path:

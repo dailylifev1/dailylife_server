@@ -1,41 +1,35 @@
 package com.dailylife.domain.comment.dto;
 
 
-import com.dailylife.domain.comment.entity.Comment;
-import com.dailylife.domain.user.entity.User;
+import com.dailylife.domain.board.entity.Board;
 import io.swagger.annotations.ApiModel;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(description = "게시물 작성시 응답 객체 ")
+@ApiModel(description = "특정 게시물에 해당 하는 댓글 리스트 응답객체")
 @Builder
 public class CommentGetResponse {
-    private Long commentNum;
+    private Long boardNum;
 
-    private String commentContext;
+    private String boardContent;
 
     private LocalDateTime commentTime;
 
-    private Long boardNum;
+    private List<CommentContentResponse> replies = new ArrayList<>();
 
-    private Long userNum;
-
-    private String userName;
-
-
-    public static CommentGetResponse from(Comment comment, User user) {
+    public static CommentGetResponse from(List<CommentContentResponse> commentList, Board board) {
         return CommentGetResponse.builder()
-                .commentNum(comment.getCommentNum())
-                .commentContext(comment.getCommentContext())
-                .commentTime(comment.getCommentTime())
-                .boardNum(comment.getBoardNum())
-                .userNum(user.getUserNum())
-                .userName(user.getUserName()).build();
+                .boardNum(board.getBoardNum())
+                .boardContent(board.getContent())
+                .replies(commentList).build();
+
     }
 
 }

@@ -36,7 +36,7 @@ public class CommentController {
 
     @ApiOperation(value = "댓글 확인", notes = "게시물 댓글 확인을 위해서 게시물번호 PK (boardNum)넘겨 주시면 됩니다.")
     @GetMapping("/getComment/{boardNum}")
-    public ResponseEntity<List<CommentGetResponse>> getComment(@PathVariable("boardNum")Long boardNum){
+    public ResponseEntity<CommentGetResponse> getComment(@PathVariable("boardNum")Long boardNum){
         return ResponseEntity.ok(commentService.getCommentList(boardNum));
     }
 

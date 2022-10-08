@@ -12,6 +12,6 @@ public interface CommentService {
 
     boolean delete(Long commentNum);
 
-    List<CommentGetResponse> getCommentList(Long boardNum);
+   CommentGetResponse getCommentList(Long boardNum);
 
 }
