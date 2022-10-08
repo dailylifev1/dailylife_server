@@ -30,8 +30,6 @@ public class User {
 
     private String userPassword;
 
-    private String userPhoneNumber;
-
     private String userEmail;
 
     private LocalDateTime userJoinDate;
@@ -60,7 +58,6 @@ public class User {
                 .userId(userJoinRequest.getUserId())
                 .userPassword(userJoinRequest.getUserPassword())
                 .userName(userJoinRequest.getUserName())
-                .userPhoneNumber(userJoinRequest.getUserPhoneNumber())
                 .userEmail(userJoinRequest.getUserEmail())
                 .userJoinDate(LocalDateTime.now())
                 .userProfileImg(imaName)
