@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.validation.Valid;
 import java.io.IOException;
@@ -84,7 +85,6 @@ public class UserController {
     public ResponseEntity<String> modifyProfileImg(MultipartFile img) throws IOException {
         return ResponseEntity.ok(userService.modifyProfileImg(img));
     }
-
 
 
 
