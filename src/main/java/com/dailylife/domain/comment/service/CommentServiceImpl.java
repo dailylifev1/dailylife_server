@@ -1,5 +1,8 @@
 package com.dailylife.domain.comment.service;
 
+import com.dailylife.domain.board.entity.Board;
+import com.dailylife.domain.board.repository.BoardRepository;
+import com.dailylife.domain.comment.dto.CommentContentResponse;
 import com.dailylife.domain.comment.dto.CommentGetResponse;
 import com.dailylife.domain.comment.dto.CommentInsertRequest;
 import com.dailylife.domain.comment.entity.Comment;
@@ -19,6 +22,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
+
+    private final BoardRepository boardRepository;
     private final JwtService jwtService;
     private final UserRepository userRepository;
     @Override
@@ -38,14 +43,23 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     @Transactional
-    public List<CommentGetResponse> getCommentList(Long boardNum) {
-        List<Comment> comment = commentRepository.findCommentByBoardNum(boardNum);
-        List<CommentGetResponse> responses = new ArrayList<>();
-        for (Comment list : comment) {
-            list.getUser();
-            responses.add(CommentGetResponse.from(list, list.getUser()));
+    public CommentGetResponse getCommentList(Long boardNum) {
+
+        List<Comment> commentList = commentRepository.findCommentByBoardNum(boardNum);
+        Board board = boardRepository.findBoardByBoardNum(boardNum);
+
+        List<CommentContentResponse> commentContent =  new ArrayList<>();
+
+        for (Comment comment : commentList) {
+
+            commentContent.add(CommentContentResponse.from(comment.getCommentNum() , comment.getCommentContext()));
+
         }
-        return responses;
+
+
+
+        return CommentGetResponse.from(commentContent , board);
+
     }
 
 
