@@ -27,19 +27,17 @@ public class UserJoinRequest {
     @ApiModelProperty(notes = "패스워드를 입력해주세요")
     private String userPassword;
 
+    @NotBlank(message = "패스워드를 입력해주세요")
+    @ApiModelProperty(notes = "패스워드를 입력해주세요")
+    private String userPasswordCheck;
+
     @NotBlank(message = "이름을 입력해주세요")
     @ApiModelProperty(notes = "이름을 입력해주세요")
     private String userName;
 
-    @NotBlank(message = "핸드폰 번호를 입력해주세요")
-    @ApiModelProperty(notes = "핸드폰 번호를 입력해주세요")
-    private String userPhoneNumber;
-
     @NotBlank(message = "이메일을 입력해주세요")
     @ApiModelProperty(notes = "이메일을 입력해주세요")
     private String userEmail;
-
-    private LocalDateTime userJoinDate;
 
     private MultipartFile userProfileImg;
 

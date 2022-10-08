@@ -35,19 +35,19 @@ public class InitDB {
                     .userId("dl1")
                     .userPassword("dl")
                     .userName("dailyLife1")
-                    .userEmail("dailyLife.dev@gmail.com").userJoinDate(LocalDateTime.now()).build();
+                    .userEmail("dailyLife.dev@gmail.com").build();
 
             UserJoinRequest userReq2 = UserJoinRequest.builder()
                     .userId("dl2")
                     .userPassword("dl")
                     .userName("dailyLife2")
-                    .userEmail("dailyLife.dev@gmail.com").userJoinDate(LocalDateTime.now()).build();
+                    .userEmail("dailyLife.dev@gmail.com").build();
 
             UserJoinRequest userReq3 = UserJoinRequest.builder()
                     .userId("dl3")
                     .userPassword("dl")
                     .userName("dailyLife3")
-                    .userEmail("dailyLife.dev@gmail.com").userJoinDate(LocalDateTime.now()).build();
+                    .userEmail("dailyLife.dev@gmail.com").build();
 
 
             userService.join(userReq1);

@@ -35,6 +35,11 @@ public class ReplyServiceImpl implements ReplyService {
         Comment comment = commentRepository.findCommentByCommentNum(replyInsertRequest.getCommentNum());
         Reply reply = replyRepository.save(Reply.toEntityReply(replyInsertRequest,user,comment));
 
+
+
+
+
+
         return reply;
     }
 
@@ -54,9 +59,7 @@ public class ReplyServiceImpl implements ReplyService {
         for (Reply list : reply) {
             list.getUser();
             response.add(ReplyGetResponse.from(list,list.getUser(),list.getComment()));
-
         }
-
         return response;
     }
 
