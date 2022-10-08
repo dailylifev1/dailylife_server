@@ -34,7 +34,7 @@ public class BoardServiceImpl implements BoardService{
     private final BoardPaginationRepository paginationRepository;
     private final HeartService heartService;
 
-    private static String ServerUrl = "http://146.56.39.196:8080/boardImg/";
+    private static String ServerUrl = "https://hipet.duckdns.org:8080/boardImg/";
 
     @Override
     @Transactional
