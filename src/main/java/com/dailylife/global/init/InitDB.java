@@ -34,18 +34,21 @@ public class InitDB {
             UserJoinRequest userReq1 = UserJoinRequest.builder()
                     .userId("dl1")
                     .userPassword("dl")
+                    .userPasswordCheck("dl")
                     .userName("dailyLife1")
                     .userEmail("dailyLife.dev@gmail.com").build();
 
             UserJoinRequest userReq2 = UserJoinRequest.builder()
                     .userId("dl2")
                     .userPassword("dl")
+                    .userPasswordCheck("dl")
                     .userName("dailyLife2")
                     .userEmail("dailyLife.dev@gmail.com").build();
 
             UserJoinRequest userReq3 = UserJoinRequest.builder()
                     .userId("dl3")
                     .userPassword("dl")
+                    .userPasswordCheck("dl")
                     .userName("dailyLife3")
                     .userEmail("dailyLife.dev@gmail.com").build();
 

@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
     public User join(UserJoinRequest userJoinRequest) throws IOException{
         if(userRepository.countByUserId(userJoinRequest.getUserId()) !=0) throw new AlreadyUserIdException();
 
-        if(userJoinRequest.getUserPassword().equals(userJoinRequest.getUserPasswordCheck())) throw new RuntimeException("비밀번호가 다릅니다.");
+        if(!userJoinRequest.getUserPassword().equals(userJoinRequest.getUserPasswordCheck())) throw new RuntimeException("비밀번호가 다릅니다.");
 
         String enPw = springSecurity.passwordEncoder().encode(userJoinRequest.getUserPassword()); // 스프링시큐리티로 pw 암호화
         userJoinRequest.setUserPassword(enPw);
