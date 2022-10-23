@@ -52,7 +52,6 @@ public class InitDB {
                     .userName("dailyLife3")
                     .userEmail("dailyLife.dev@gmail.com").build();
 
-
             userService.join(userReq1);
             userService.join(userReq2);
             userService.join(userReq3);

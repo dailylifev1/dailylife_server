@@ -3,6 +3,7 @@ package com.dailylife.domain.comment.controller;
 import com.dailylife.domain.comment.dto.CommentDeleteRequest;
 import com.dailylife.domain.comment.dto.CommentGetResponse;
 import com.dailylife.domain.comment.dto.CommentInsertRequest;
+import com.dailylife.domain.comment.dto.CommentReplyResponse;
 import com.dailylife.domain.comment.entity.Comment;
 import com.dailylife.domain.comment.service.CommentService;
 import io.swagger.annotations.Api;
@@ -39,5 +40,14 @@ public class CommentController {
     public ResponseEntity<CommentGetResponse> getComment(@PathVariable("boardNum")Long boardNum){
         return ResponseEntity.ok(commentService.getCommentList(boardNum));
     }
+
+    @ApiOperation(value = "전체 댓글과 대댓글 리스트 확인", notes = "boardNum을 넘겨주시면 됩니다.")
+    @GetMapping("/getCommentToReply/{boardNum}")
+    public ResponseEntity<List<CommentReplyResponse>> getCommentToReply(@PathVariable("boardNum")Long boardNum){
+        return ResponseEntity.ok(commentService.getCommentToReply(boardNum));
+    }
+
+
+
 
 }

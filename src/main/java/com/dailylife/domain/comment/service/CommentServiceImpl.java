@@ -5,8 +5,13 @@ import com.dailylife.domain.board.repository.BoardRepository;
 import com.dailylife.domain.comment.dto.CommentContentResponse;
 import com.dailylife.domain.comment.dto.CommentGetResponse;
 import com.dailylife.domain.comment.dto.CommentInsertRequest;
+import com.dailylife.domain.comment.dto.CommentReplyResponse;
 import com.dailylife.domain.comment.entity.Comment;
 import com.dailylife.domain.comment.repository.CommentRepository;
+import com.dailylife.domain.reply.dto.ReplyGetResponse;
+import com.dailylife.domain.reply.dto.ReplyToCommentResponse;
+import com.dailylife.domain.reply.repository.ReplyRepository;
+import com.dailylife.domain.reply.service.ReplyService;
 import com.dailylife.domain.user.repository.UserRepository;
 import com.dailylife.global.jwt.service.JwtService;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +27,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
+    private final ReplyService replyService;
 
     private final BoardRepository boardRepository;
     private final JwtService jwtService;
@@ -45,16 +51,16 @@ public class CommentServiceImpl implements CommentService {
     @Transactional
     public CommentGetResponse getCommentList(Long boardNum) {
 
-        List<Comment> commentList = commentRepository.findCommentByBoardNum(boardNum);
+        List<Comment> commentList = getCommentByBoardNum(boardNum);
         Board board = boardRepository.findBoardByBoardNum(boardNum);
 
         List<CommentContentResponse> commentContent =  new ArrayList<>();
 
         for (Comment comment : commentList) {
-
             commentContent.add(CommentContentResponse.from(comment.getCommentNum() , comment.getCommentContext()));
 
         }
+
 
 
 
@@ -62,9 +68,33 @@ public class CommentServiceImpl implements CommentService {
 
     }
 
+    @Override
+    @Transactional
+    public List<CommentReplyResponse> getCommentToReply(Long boardNum) {
 
+        List<Comment> commentList = getCommentByBoardNum(boardNum);
 
+        List<CommentReplyResponse> commentListToReply =  new ArrayList<>();
 
+        for (Comment comment : commentList) {
+
+            List<ReplyToCommentResponse> replyListToComment = replyService.getReplyListToComment(comment.getCommentNum());
+
+            commentListToReply.add(CommentReplyResponse.from(
+                    comment.getCommentNum() ,
+                    comment.getCommentContext() ,
+                    comment.getCommentTime() ,
+                    replyListToComment
+            ));
+
+        }
+
+        return commentListToReply;
+    }
+
+    private List<Comment> getCommentByBoardNum(Long boardNum) {
+        return commentRepository.findCommentByBoardNum(boardNum);
+    }
 
 
 }

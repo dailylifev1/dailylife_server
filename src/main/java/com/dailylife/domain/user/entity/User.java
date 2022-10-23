@@ -2,8 +2,8 @@ package com.dailylife.domain.user.entity;
 
 import com.dailylife.domain.board.entity.Board;
 import com.dailylife.domain.comment.entity.Comment;
-import com.dailylife.domain.user.dto.UserJoinRequest;
 import com.dailylife.domain.follow.entity.Follow;
+import com.dailylife.domain.user.dto.UserJoinRequest;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
