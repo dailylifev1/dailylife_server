@@ -113,7 +113,6 @@ public class BoardServiceImpl implements BoardService{
             BoardCreateAndGetResponseList.add(BoardCreateAndGetResponse.from(board , imageNameList , serverFileUrl,false));
         }
         return BoardCreateAndGetResponseList;
-
     }
 
     @Override

@@ -39,4 +39,6 @@ public class ReplyController {
         return ResponseEntity.ok(replyService.getReplyList(commentNum));
     }
 
+
+
 }

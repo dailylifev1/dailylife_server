@@ -4,6 +4,7 @@ import com.dailylife.domain.comment.entity.Comment;
 import com.dailylife.domain.comment.repository.CommentRepository;
 import com.dailylife.domain.reply.dto.ReplyGetResponse;
 import com.dailylife.domain.reply.dto.ReplyInsertRequest;
+import com.dailylife.domain.reply.dto.ReplyToCommentResponse;
 import com.dailylife.domain.reply.entity.Reply;
 import com.dailylife.domain.reply.repository.ReplyRepository;
 import com.dailylife.domain.user.entity.User;
@@ -59,6 +60,17 @@ public class ReplyServiceImpl implements ReplyService {
         for (Reply list : reply) {
             list.getUser();
             response.add(ReplyGetResponse.from(list,list.getUser(),list.getComment()));
+        }
+        return response;
+    }
+
+    @Override
+    @Transactional
+    public List<ReplyToCommentResponse> getReplyListToComment(Long commentNum) {
+        List<ReplyToCommentResponse> response = new ArrayList<>();
+        List<Reply> reply = replyRepository.findByReplyNum(commentNum);
+        for (Reply list : reply) {
+            response.add(ReplyToCommentResponse.from(list.getReplyNum() , list.getReplyContext()));
         }
         return response;
     }
