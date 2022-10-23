@@ -18,18 +18,17 @@ import java.util.List;
 public class CommentGetResponse {
     private Long boardNum;
 
-    private String boardContent;
+        private String boardContent;
 
-    private LocalDateTime commentTime;
+        private LocalDateTime commentTime;
 
-    private List<CommentContentResponse> replies = new ArrayList<>();
+        private List<CommentContentResponse> replies = new ArrayList<>();
 
-    public static CommentGetResponse from(List<CommentContentResponse> commentList, Board board) {
-        return CommentGetResponse.builder()
-                .boardNum(board.getBoardNum())
+        public static CommentGetResponse from(List<CommentContentResponse> commentList, Board board) {
+            return CommentGetResponse.builder()
+                    .boardNum(board.getBoardNum())
                 .boardContent(board.getContent())
                 .replies(commentList).build();
-
     }
 
 }

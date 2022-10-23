@@ -12,6 +12,7 @@ import com.dailylife.domain.reply.dto.ReplyGetResponse;
 import com.dailylife.domain.reply.dto.ReplyToCommentResponse;
 import com.dailylife.domain.reply.repository.ReplyRepository;
 import com.dailylife.domain.reply.service.ReplyService;
+import com.dailylife.domain.user.entity.User;
 import com.dailylife.domain.user.repository.UserRepository;
 import com.dailylife.global.jwt.service.JwtService;
 import lombok.RequiredArgsConstructor;
@@ -83,6 +84,8 @@ public class CommentServiceImpl implements CommentService {
             commentListToReply.add(CommentReplyResponse.from(
                     comment.getCommentNum() ,
                     comment.getCommentContext() ,
+                    comment.getUser().getUserName(),
+                    comment.getUser().getUserProfileImg(),
                     comment.getCommentTime() ,
                     replyListToComment
             ));
