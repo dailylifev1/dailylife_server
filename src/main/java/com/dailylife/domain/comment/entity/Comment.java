@@ -45,7 +45,6 @@ public class Comment {
     private List<Reply> replyComments = new ArrayList<>();
 
 
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="userNum")
     private User user;

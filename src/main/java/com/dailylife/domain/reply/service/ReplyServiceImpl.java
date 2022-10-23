@@ -69,8 +69,14 @@ public class ReplyServiceImpl implements ReplyService {
     public List<ReplyToCommentResponse> getReplyListToComment(Long commentNum) {
         List<ReplyToCommentResponse> response = new ArrayList<>();
         List<Reply> reply = replyRepository.findByReplyNum(commentNum);
-        for (Reply list : reply) {
-            response.add(ReplyToCommentResponse.from(list.getReplyNum() , list.getReplyContext()));
+        for (Reply replyList : reply) {
+            response.add(ReplyToCommentResponse.from(
+                    replyList.getReplyNum() ,
+                    replyList.getReplyContext() ,
+                    replyList.getUser().getUserName(),
+                    replyList.getUser().getUserProfileImg() ,
+                    replyList.getReplyTime()
+            ));
         }
         return response;
     }

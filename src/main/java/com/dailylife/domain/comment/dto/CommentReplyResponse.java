@@ -17,9 +17,11 @@ public class CommentReplyResponse {
     private Long id;
     private String content;
     private LocalDateTime date;
+    private String username;
+    private String thumbnail;
     private List<ReplyToCommentResponse> replies = new ArrayList<>();
 
-    public static CommentReplyResponse from(Long id , String content , LocalDateTime date ,
+    public static CommentReplyResponse from(Long id , String content , String username , String  thumbnail , LocalDateTime date ,
                                             List<ReplyToCommentResponse> replies) {
 
         return CommentReplyResponse.builder()
