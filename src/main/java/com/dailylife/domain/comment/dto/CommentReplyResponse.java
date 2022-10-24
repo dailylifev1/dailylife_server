@@ -21,15 +21,15 @@ public class CommentReplyResponse {
     private String thumbnail;
     private List<ReplyToCommentResponse> replies = new ArrayList<>();
 
-    public static CommentReplyResponse from(Long id , String content , String username , String  thumbnail , LocalDateTime date ,
-                                            List<ReplyToCommentResponse> replies) {
+    public static CommentReplyResponse from(Long id , String content , String username , String  thumbnail , LocalDateTime date , List<ReplyToCommentResponse> replies) {
 
         return CommentReplyResponse.builder()
                 .id(id)
+                .username(username)
+                .thumbnail(thumbnail)
                 .content(content)
                 .date(date)
                 .replies(replies).build();
-
     }
 
 }
