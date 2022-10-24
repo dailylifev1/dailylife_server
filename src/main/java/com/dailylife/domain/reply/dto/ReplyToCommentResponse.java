@@ -18,19 +18,18 @@ public class ReplyToCommentResponse {
     private Long id;
     private String content;
 
-    private LocalDateTime localDateTime;
+    private LocalDateTime date;
 
     private String username;
     private String thumbnail;
 
     public static ReplyToCommentResponse from (Long id , String content , String username , String thumbnail , LocalDateTime localDateTime) {
-
         return ReplyToCommentResponse.builder()
                 .id(id)
                 .content(content)
                 .username(username)
                 .thumbnail(thumbnail)
-                .localDateTime(localDateTime)
+                .date(localDateTime)
                 .build();
 
     }
